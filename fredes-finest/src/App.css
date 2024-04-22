@@ -1,0 +1,7 @@
+/* Style for the rest of the content */
+.content {
+  margin-left: 200px; /* Adjust this value if navbar width changes */
+  padding: 1px 16px;
+  height: 1000px; /* Sample height */
+  background-color: #fff; /* Optional: Makes content visually distinctive */
+}
