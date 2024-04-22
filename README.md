@@ -7,7 +7,7 @@ Welcome to our project repository! This guide is intended to help all contributo
 
 ### Setting Up Your Local Environment
 
-1. **Clone the Repository**: If you haven't already, clone the repository to your local machine. Use GitHub Desktop or the following Git command: ` git clone url`
+1. **Clone the Repository**: If you haven't already, clone the repository to your local machine. Use GitHub Desktop or the following Git command: ` git clone <url>`
 
 2. **Navigate into the Repository Directory**:
 `cd your-repository-name`
@@ -15,11 +15,11 @@ Welcome to our project repository! This guide is intended to help all contributo
 
 
 3. **Fetch All Branches**: Make sure you have the latest list of branches:
-`git fetch --all
+`git fetch --all`
 
 
 4. **Switch to the Develop Branch**: Our main integration branch is `develop`.
-`git checkout develop
+`git checkout develop`
 
 
 ### Working on a New Feature
@@ -30,6 +30,11 @@ Welcome to our project repository! This guide is intended to help all contributo
 
 
 Replace `<feature-name>` with a short name describing the feature (e.g., `add-login`).
+
+Run installation for node modules and package-lock.json file:
+´npm run i´
+If issues: use ´sudo npm run i`.
+
 
 2. **Develop Your Feature**: Write code and commit changes to this branch. Make commits as small as possible while maintaining the app in a functional state.
 
