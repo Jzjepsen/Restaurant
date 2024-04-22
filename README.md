@@ -59,10 +59,5 @@ Once your PR is approved by the team:
 1. **Merge the PR**: Use the "Squash and Merge" option on GitHub to merge your changes into the `develop` branch. This keeps our history clean and easy to follow.
 2. **Delete Your Feature Branch** (optional but recommended on GitHub after merging).
 
-### General Best Practices
-
-- **Communication**: Keep communication open with your teammates. Inform others of what you're working on and any issues you encounter.
-- **Code Style and Conventions**: Adhere to the coding standards and conventions agreed upon by the team.
-- **Testing**: Ensure your code is well-tested and does not break the build.
 
 
