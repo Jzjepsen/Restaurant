@@ -6,8 +6,7 @@ import { useUser } from './services/UserContext';
 import ManagerOverview from './pages/Manager/Overview';
 import KitchenOverview from './pages/Kitchen/Overview/Overview';
 import WaiterOverview from './pages/Kitchen/Overview/Overview';
-import Menu from './pages/Menu';
-
+import Menu from './pages/Manager/Menu/Menu';
 
 function App() {
   const { user } = useUser(); // Assuming useUser returns the current user role among other properties
@@ -21,7 +20,6 @@ function App() {
             <Route path='/Kitchen/Overview' element={<KitchenOverview />} />
             <Route path='/Waiter/Overview' element={<WaiterOverview />} />
             <Route path='/Menu' element={<Menu />} />
-
           </Routes>
       </div>
   );

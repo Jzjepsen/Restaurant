@@ -1,0 +1,13 @@
+.menu-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+    grid-gap: 20px; /* Gap between grid items */
+}
+
+.menu-content {
+    /* Additional styling for the menu content */
+}
+
+.create-menu-container {
+    /* Additional styling for the create menu container */
+}
