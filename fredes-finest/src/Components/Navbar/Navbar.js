@@ -13,6 +13,7 @@ const Navbar = () => {
       <Link to="/Manager/Overview" className={styles.link}>Manager Overview</Link>
       <Link to="/Kitchen/Overview" className={styles.link}>Kitchen Overview</Link>
       <Link to="/Waiter/Overview" className={styles.link}>Waiter Overview</Link>
+      <Link to="/Menu" className={styles.link}>Menu Overview</Link>
     </div>
     );
 };

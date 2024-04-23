@@ -1,0 +1,16 @@
+{
+    "menus": [
+      {
+        "name": "Garlic bread",
+        "allergens": "Gluten",
+        "timeToCook": "25",
+        "id": "1"
+      },
+      {
+        "name": "Spaghetti meatballs",
+        "allergens": "gluten",
+        "timeToCook": "35",
+        "id": "2"
+      }
+    ]
+}
