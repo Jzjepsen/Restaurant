@@ -1,6 +1,14 @@
-# Restaurant
-React Frontend Application for fourth semester project at AU
+# QUICK 3 STEP GUIDE FOR DEVELOPERS
+ 1. clone
+    - NAVIGATE TO THE fredes-finest folder
+ 3. npm install
+ 4. npm start
 
+
+ ## When comitting
+ If your commit for some reason includes the folder node_modules and the file package_lock.json, delete this and create a new commit to the branch. 
+
+___________
 ## Collaborative Development Guide
 
 Welcome to our project repository! This guide is intended to help all contributors follow our collaborative development process using a feature branching strategy with pull requests to ensure code quality and maintain a clean history in our `main` and `develop` branches.
