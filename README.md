@@ -1,13 +1,21 @@
-# Restaurant
-React Frontend Application for fourth semester project at AU
+# QUICK 3 STEP GUIDE FOR DEVELOPERS
+ 1. clone
+    - NAVIGATE TO THE fredes-finest folder
+ 3. npm install
+ 4. npm start
 
+
+ ## When comitting
+ If your commit for some reason includes the folder node_modules and the file package_lock.json, delete this and create a new commit to the branch. 
+
+___________
 ## Collaborative Development Guide
 
 Welcome to our project repository! This guide is intended to help all contributors follow our collaborative development process using a feature branching strategy with pull requests to ensure code quality and maintain a clean history in our `main` and `develop` branches.
 
 ### Setting Up Your Local Environment
 
-1. **Clone the Repository**: If you haven't already, clone the repository to your local machine. Use GitHub Desktop or the following Git command: ` git clone url`
+1. **Clone the Repository**: If you haven't already, clone the repository to your local machine. Use GitHub Desktop or the following Git command: ` git clone <url>`
 
 2. **Navigate into the Repository Directory**:
 `cd your-repository-name`
@@ -15,11 +23,11 @@ Welcome to our project repository! This guide is intended to help all contributo
 
 
 3. **Fetch All Branches**: Make sure you have the latest list of branches:
-`git fetch --all
+`git fetch --all`
 
 
 4. **Switch to the Develop Branch**: Our main integration branch is `develop`.
-`git checkout develop
+`git checkout develop`
 
 
 ### Working on a New Feature
@@ -30,6 +38,11 @@ Welcome to our project repository! This guide is intended to help all contributo
 
 
 Replace `<feature-name>` with a short name describing the feature (e.g., `add-login`).
+
+Run installation for node modules and package-lock.json file:
+´npm run i´
+If issues: use ´sudo npm run i`.
+
 
 2. **Develop Your Feature**: Write code and commit changes to this branch. Make commits as small as possible while maintaining the app in a functional state.
 
@@ -59,10 +72,5 @@ Once your PR is approved by the team:
 1. **Merge the PR**: Use the "Squash and Merge" option on GitHub to merge your changes into the `develop` branch. This keeps our history clean and easy to follow.
 2. **Delete Your Feature Branch** (optional but recommended on GitHub after merging).
 
-### General Best Practices
-
-- **Communication**: Keep communication open with your teammates. Inform others of what you're working on and any issues you encounter.
-- **Code Style and Conventions**: Adhere to the coding standards and conventions agreed upon by the team.
-- **Testing**: Ensure your code is well-tested and does not break the build.
 
 
