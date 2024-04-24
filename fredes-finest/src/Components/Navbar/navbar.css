@@ -1,15 +1,16 @@
-/* Styles for the navbar */
 .navbar {
-    height: 100vh; /* Full-height */
-    width: 200px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
-    left: 0;
-    background-color: #ffffff; /* Black */
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 20px;
-  }
+  height: 100vh; /* Full-height */
+  width: 200px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #E4F3F2; /* Background color */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
   
   /* Style the navigation menu inside the sidebar */
   .navbar a {
@@ -18,11 +19,18 @@
     font-size: 18px;
     color: rgb(0, 0, 0);
     display: block;
+
   }
   
   /* Styling for when you hover over the links */
   .navbar a:hover {
     background-color: #C6D5D6; /* Dark grey */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+
   }
+
+  body {
+    font-family: Arial, sans-serif;
+}
 
   
