@@ -11,4 +11,8 @@
     border: 1px solid #ddd;
     box-sizing: border-box;
     display: block;
-  }
+}
+
+.createMenu .menuAttributeTitle {
+    font-size: large;
+}

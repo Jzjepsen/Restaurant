@@ -5,13 +5,23 @@
 .menu-grid-container {
     display: flex;
     flex-direction: row;
+    height: 500px; /* Set the height of the container */
 }
 
 .menu-content {
     flex: 1;
     margin-right: 20px;
+    border-right: 1px solid black; /* Add a black border to the right */
+    height: 100%;
 }
 
 .create-menu-container {
     flex: 1;
+}
+
+.pageTitle {
+    font-size: 35px;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
