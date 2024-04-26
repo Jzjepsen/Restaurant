@@ -1,7 +1,7 @@
 import MenuItem from "../Menu/MenuItem";
 import CreateMenu from "../Menu/CreateMenu";
 import useFetch from "../../../services/useFetch";
-import './Menu.css'; // Import CSS file for styling
+import "./Menu.css"
 
 const Menu = () => {
     const { data: menus, isPending, error } = useFetch('http://localhost:8000/menus');

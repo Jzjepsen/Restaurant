@@ -1,13 +1,17 @@
+.menu-container {
+    padding: 20px;
+}
+
 .menu-grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns with equal width */
-    grid-gap: 20px; /* Gap between grid items */
+    display: flex;
+    flex-direction: row;
 }
 
 .menu-content {
-    /* Additional styling for the menu content */
+    flex: 1;
+    margin-right: 20px;
 }
 
 .create-menu-container {
-    /* Additional styling for the create menu container */
+    flex: 1;
 }

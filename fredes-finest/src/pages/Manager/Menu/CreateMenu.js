@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './CreateMenu.css';
 
 const CreateMenu = () => {
     const [name, setName] = useState('');
