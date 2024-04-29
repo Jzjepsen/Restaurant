@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ManagerOverview() {
+function KitchenOverview() {
     return (
         <div>
             <h1>Kitchen Overview</h1>
@@ -9,4 +9,4 @@ function ManagerOverview() {
     );
 }
 
-export default ManagerOverview;
+export default KitchenOverview;

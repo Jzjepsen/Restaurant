@@ -1,0 +1,45 @@
+/* OrderItem.css */
+.orderItem {
+    background-color: white;
+    border: 2px solid #5CB6B0;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menuItemName {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.orderStatus {
+    background-color: #f0f0f0; /* Light gray background for the status */
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+.menuItemQuantity {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.commentSection {
+    display: flex;
+}
+
+.commentInput {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

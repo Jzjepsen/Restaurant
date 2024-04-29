@@ -1,0 +1,26 @@
+/* WaiterOverview.css */
+.waiter-overview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 80px;
+    margin-top: 150px; /* Adds space above the buttons */
+}
+
+.waiter-overview button {
+    display: block;
+    width: 350px; /* Increased width */
+    height: 100px; /* Increased height */
+    font-size: 24px; /* Increased font size */
+    text-align: center;
+    background-color: #5CB6B0;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+}
+
+.waiter-overview button:hover {
+    opacity: 0.8;
+}
