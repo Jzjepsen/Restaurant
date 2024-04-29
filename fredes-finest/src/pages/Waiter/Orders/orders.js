@@ -1,5 +1,4 @@
 import React from 'react';
-import OrderItem from '../../../Components/OrderItem/OrderItem';  // Ensure path accuracy
 import './Orders.css';
 
 function Orders() {

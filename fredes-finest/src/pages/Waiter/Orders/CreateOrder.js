@@ -1,7 +1,8 @@
 // CreateOrder.js
 import React, { useState } from 'react';
 import './CreateOrder.css';
-import OrderItem from '../../../Components/OrderItem/OrderItem';
+import OrderItems from '../../../Components/OrderItem/OrderItems';
+
 
 function CreateOrder() {
     const [currentOrder, setCurrentOrder] = useState([]);
@@ -58,7 +59,7 @@ function CreateOrder() {
                     </div>
                     <div className="currentOrderList">
                         {currentOrder.map((item) => (
-                            <OrderItem 
+                            <OrderItems 
                                 key={item.menuItem.id}
                                 item={item}
                                 onItemClick={handleItemClick}
