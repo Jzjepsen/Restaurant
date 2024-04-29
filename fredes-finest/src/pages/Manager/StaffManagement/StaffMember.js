@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const StaffMember = ({ StaffMember}) => {
+const StaffMember = ({ staffs}) => {
     return ( 
         <div className="staff-member">
             {staffs.map(staff => (
