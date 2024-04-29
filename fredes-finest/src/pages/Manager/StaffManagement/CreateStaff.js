@@ -5,11 +5,12 @@ const CreateMenu = () => {
     const [lastName, setLastName] = useState('');
     const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
+    const [role, setRole] = useState('');
     const [isPending, setIsPending] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const staff = { firstName, lastName, age, email};
+        const staff = { firstName, lastName, age, email, role};
 
         setIsPending(true);
 
@@ -55,6 +56,14 @@ const CreateMenu = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
+                <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    >
+                        <option value="Waiter">Waiter</option>
+                        <option value="Kitchen staff">Kitchen staff</option>
+
+                    </select>
                 {!isPending && <button>Add staff</button>}
                 {isPending && <button disabled>Adding staff...</button>}
             </form>
