@@ -10,10 +10,10 @@ import Settings from './pages/Manager/Settings/settings';
 import WaiterOverview from './pages/Waiter/Overview/Overview';
 import WaiterMenu from './pages/Waiter/Menu/menu';
 import Bookings from './pages/Waiter/Bookings/bookings';
-import Orders from './pages/Waiter/Orders/orders'
+import Orders from './pages/Waiter/Orders/Orders'
 import KitchenOverview from './pages/Kitchen/Overview/Overview';
-
-
+import WaiterOverview from './pages/Kitchen/Overview/Overview';
+import Menu from './pages/Manager/Menu/Menu';
 
 function App() {
   // This user context is used to determine what to render in Navbar
@@ -33,6 +33,9 @@ function App() {
         <Route path='/Waiter/Menu' element={<WaiterMenu />} />
         <Route path='/Waiter/Bookings' element={<Bookings />} />
         <Route path='/Waiter/Orders' element={<Orders/>} />
+        <Route path='/Waiter/Orders/CreateOrder' element={<CreateOrder />} />
+        <Route path='/Waiter/Payment/Payment' element={<Payment />} />
+
         <Route path='/Kitchen/Overview' element={<KitchenOverview />} />
       </Routes>
     </div>
