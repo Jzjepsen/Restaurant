@@ -7,11 +7,13 @@ import ManagerOverview from './pages/Manager/Overview';
 import ManagerConfigureMenu from './pages/Manager/ConfigureMenu/CreateMenu';
 import StaffManagement from './pages/Manager/StaffManagement/StaffManagement';
 import Settings from './pages/Manager/Settings/settings';
-import WaiterOverview from './pages/Waiter/Overview/Overview';
 import WaiterMenu from './pages/Waiter/Menu/menu';
 import Bookings from './pages/Waiter/Bookings/bookings';
 import Orders from './pages/Waiter/Orders/Orders'
 import KitchenOverview from './pages/Kitchen/Overview/Overview';
+import WaiterOverview from './pages/Waiter/Overview/Overview';
+import CreateOrder from './pages/Waiter/Orders/CreateOrder';
+import Payment from './pages/Waiter/Payment/Payment';
 import Menu from './pages/Manager/Menu/Menu';
 
 function App() {
