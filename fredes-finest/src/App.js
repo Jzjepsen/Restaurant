@@ -7,7 +7,7 @@ import ManagerOverview from './pages/Manager/Overview';
 import ManagerConfigureMenu from './pages/Manager/ConfigureMenu/CreateMenu';
 import StaffManagement from './pages/Manager/StaffManagement/StaffManagement';
 import Settings from './pages/Manager/Settings/settings';
-import WaiterMenu from './pages/Waiter/Menu/menu';
+import WaiterMenu from './pages/Waiter/Menu/Menu';
 import Bookings from './pages/Waiter/Bookings/bookings';
 import Orders from './pages/Waiter/Orders/Orders'
 import KitchenOverview from './pages/Kitchen/Overview/Overview';

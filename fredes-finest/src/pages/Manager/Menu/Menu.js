@@ -1,6 +1,6 @@
 import MenuItem from "../Menu/MenuItem";
 import CreateMenu from "../Menu/CreateMenu";
-import useFetch from "../../../services/useFetch";sdsdsd
+import useFetch from "../../../services/useFetch";
 import "./Menu.css"
 
 const Menu = () => {

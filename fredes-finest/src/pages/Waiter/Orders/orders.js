@@ -1,5 +1,6 @@
 import React from 'react';
 import './Orders.css';
+import OrderItems from '../../../Components/OrderItem/OrderItems';
 
 function Orders() {
     const dummyOrders = [
@@ -43,7 +44,7 @@ function Orders() {
                 <div className="orderColumn">
                     <h2>New Orders</h2>
                     {newOrders.map(order => (
-                        <OrderItem
+                        <OrderItems
                             key={order.menuItem.id}
                             item={order}
                             status={order.status}
@@ -55,7 +56,7 @@ function Orders() {
                 <div className="orderColumn">
                     <h2>Preparing</h2>
                     {preparingOrders.map(order => (
-                        <OrderItem
+                        <OrderItems
                             key={order.menuItem.id}
                             item={order}
                             status={order.status}
@@ -67,7 +68,7 @@ function Orders() {
                 <div className="orderColumn">
                     <h2>Done</h2>
                     {doneOrders.map(order => (
-                        <OrderItem
+                        <OrderItems
                             key={order.menuItem.id}
                             item={order}
                             status={order.status}
