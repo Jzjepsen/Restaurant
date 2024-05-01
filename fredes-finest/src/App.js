@@ -12,7 +12,6 @@ import WaiterMenu from './pages/Waiter/Menu/menu';
 import Bookings from './pages/Waiter/Bookings/bookings';
 import Orders from './pages/Waiter/Orders/Orders'
 import KitchenOverview from './pages/Kitchen/Overview/Overview';
-import WaiterOverview from './pages/Kitchen/Overview/Overview';
 import Menu from './pages/Manager/Menu/Menu';
 
 function App() {
