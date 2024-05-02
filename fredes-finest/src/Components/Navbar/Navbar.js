@@ -29,7 +29,7 @@ const Navbar = () => {
         case 'Kitchen':
           return (
           <>
-            <Link to="/Waiter/Overview" className={styles.link}>Kitchen Overview</Link>
+            <Link to="/Kitchen/Overview" className={styles.link}>Kitchen Overview</Link>
           </>
           );
           default:
