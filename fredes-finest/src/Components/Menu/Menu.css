@@ -1,0 +1,28 @@
+.menu-container {
+    height: 500px; /* Set a fixed height for the container */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
+    padding: 10px; /* Optional: Add some padding inside the container */
+}
+
+.menu-item {
+    margin-bottom: 10px; /* Add some space between menu items */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.menu-item.sold-out {
+    border: 1px solid red; /* Set the border color to red for sold out items */
+}
+
+.menu-item.available {
+    border: 1px solid #5CB6B0; /* Set the border color to green for available items */
+}
+
+.menu-item h3 {
+    margin: 0 0 5px 0;
+}
+
+.menu-item p {
+    margin: 0;
+}
