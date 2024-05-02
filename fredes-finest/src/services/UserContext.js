@@ -19,8 +19,6 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-
-
 //********* LOGIN METHOD TO CONNECT WITH BACKEND */ 
 //
 // const login = async (username, password) => {
@@ -42,4 +40,3 @@ export const UserProvider = ({ children }) => {
 //       console.error('Login failed:', error);
 //     }
 //   };
-  

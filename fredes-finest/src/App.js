@@ -7,13 +7,11 @@ import ManagerOverview from './pages/Manager/Overview';
 import ManagerConfigureMenu from './pages/Manager/ConfigureMenu/CreateMenu';
 import StaffManagement from './pages/Manager/StaffManagement/StaffManagement';
 import Settings from './pages/Manager/Settings/settings';
-import WaiterOverview from './pages/Waiter/Overview/Overview';
-import WaiterMenu from './pages/Waiter/Menu/menu';
 import Bookings from './pages/Waiter/Bookings/bookings';
-import Orders from './pages/Waiter/Orders/Orders'
 import KitchenOverview from './pages/Kitchen/Overview/Overview';
-import WaiterOverview from './pages/Kitchen/Overview/Overview';
-import Menu from './pages/Manager/Menu/Menu';
+import WaiterOverview from './pages/Waiter/Overview/Overview';
+import CreateOrder from './pages/Waiter/Orders/CreateOrder';
+import Payment from './pages/Waiter/Payment/Payment';
 
 function App() {
   // This user context is used to determine what to render in Navbar
@@ -30,9 +28,9 @@ function App() {
         <Route path='/Manager/StaffManagement' element={<StaffManagement />} />
         <Route path='/Manager/Settings' element={<Settings />} />
         <Route path='/Waiter/Overview' element={<WaiterOverview />} />
-        <Route path='/Waiter/Menu' element={<WaiterMenu />} />
+
         <Route path='/Waiter/Bookings' element={<Bookings />} />
-        <Route path='/Waiter/Orders' element={<Orders/>} />
+       
         <Route path='/Waiter/Orders/CreateOrder' element={<CreateOrder />} />
         <Route path='/Waiter/Payment/Payment' element={<Payment />} />
 
