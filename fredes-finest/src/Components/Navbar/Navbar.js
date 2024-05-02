@@ -5,7 +5,6 @@ import styles from './navbar.css';
 const Navbar = () => {
   const { user } = useUser(); // Get the current user role
 
-  console.log("Navbar is rendering, current role:", user.role);  // Check if role updates
 
   const renderLinks = () => {
     switch(user.role){
@@ -40,11 +39,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <Link to="/Home" className={styles.link}>Home</Link>
-      <Link to="/Manager/Overview" className={styles.link}>Manager Overview</Link>
-      <Link to="/Kitchen/Overview" className={styles.link}>Kitchen Overview</Link>
-      <Link to="/Waiter/Overview" className={styles.link}>Waiter Overview</Link>
-      <Link to="/Menu" className={styles.link}>Menu Overview</Link>
-      <Link to="/Staff" className={styles.link}>Staff Overview</Link>
+      {renderLinks()}
     </div>
     );
 };
