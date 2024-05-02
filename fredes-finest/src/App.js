@@ -12,6 +12,8 @@ import KitchenOverview from './pages/Kitchen/Overview/Overview';
 import WaiterOverview from './pages/Waiter/Overview/Overview';
 import CreateOrder from './pages/Waiter/Orders/CreateOrder';
 import Payment from './pages/Waiter/Payment/Payment';
+import MenuView from './pages/Waiter/Menu/MenuView';
+import OrderView from './pages/Waiter/Orders/Order';
 
 function App() {
   // This user context is used to determine what to render in Navbar
@@ -28,12 +30,11 @@ function App() {
         <Route path='/Manager/StaffManagement' element={<StaffManagement />} />
         <Route path='/Manager/Settings' element={<Settings />} />
         <Route path='/Waiter/Overview' element={<WaiterOverview />} />
-
         <Route path='/Waiter/Bookings' element={<Bookings />} />
-       
+        <Route path='/Waiter/Menu' element={<MenuView />} />
+        <Route path='/Waiter/Orders' element={<OrderView />} />
         <Route path='/Waiter/Orders/CreateOrder' element={<CreateOrder />} />
         <Route path='/Waiter/Payment/Payment' element={<Payment />} />
-
         <Route path='/Kitchen/Overview' element={<KitchenOverview />} />
       </Routes>
     </div>
