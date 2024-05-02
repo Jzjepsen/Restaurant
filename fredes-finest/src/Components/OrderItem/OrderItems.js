@@ -1,8 +1,7 @@
-// OrderItem.js
 import React from 'react';
 import './OrderItem.css';
 
-function OrderItem({ item, onItemClick, onCommentChange, status = 'new order' }) {
+function OrderItems({ item, onItemClick, onCommentChange, status = 'new order' }) {
     return (
         <div className="orderItem" onClick={() => onItemClick(item.menuItem.id)}>
             <div className="orderHeader">
@@ -23,4 +22,4 @@ function OrderItem({ item, onItemClick, onCommentChange, status = 'new order' })
     );
 }
 
-export default OrderItem;
+export default OrderItems;
