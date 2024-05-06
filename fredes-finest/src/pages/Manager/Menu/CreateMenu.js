@@ -14,7 +14,7 @@ const CreateMenu = () => {
 
         setIsPending(true);
 
-        fetch('http://localhost:8000/menus', {
+        fetch('https://localhost:7033/api/MenuItems', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(menu)

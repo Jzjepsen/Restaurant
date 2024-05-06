@@ -1,24 +1,40 @@
 // MenuContext.js
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const MenuContext = createContext();
 
 export const useMenu = () => useContext(MenuContext);
 
 export const MenuProvider = ({ children }) => {
-    const [menuItems, setMenuItems] = useState([
-        { name: 'Pizza Margherita', description: 'Classic Italian pizza with tomato sauce, mozzarella, and basil.', isSoldOut: false },
-        { name: 'Spaghetti Carbonara', description: 'Spaghetti with bacon, eggs, and parmesan cheese.', isSoldOut: false },
-        { name: 'Caesar Salad', description: 'Romaine lettuce, croutons, parmesan cheese, and Caesar dressing.', isSoldOut: true },
-        // Add more menu items as needed
-    ]);
+    const [menuItems, setMenuItems] = useState([]);
+    const [isPending, setIsPending] = useState(true);
+    const [error, setError] = useState(null);
 
-    const toggleSoldOut = (index) => {
-        setMenuItems(menuItems.map((item, i) => i === index ? { ...item, isSoldOut: !item.isSoldOut } : item));
-    };
+    useEffect(() => {
+        fetch('https://localhost:7033/api/MenuItems', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Could not fetch the data for that resource');
+            return response.json();
+        })
+        .then(data => {
+            setIsPending(false);
+            setMenuItems(data);
+            setError(null);
+        })
+        .catch(err => {
+            setIsPending(false);
+            setError(err.message);
+            console.log(err);
+        });
+    }, []);
 
     return (
-        <MenuContext.Provider value={{ menuItems, toggleSoldOut }}>
+        <MenuContext.Provider value={{ menuItems, isPending, error }}>
             {children}
         </MenuContext.Provider>
     );
