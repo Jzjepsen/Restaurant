@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './StaffManagement.css';
 
 const CreateStaff = () => {
     const [firstName, setFirstName] = useState('');
@@ -64,7 +65,7 @@ const CreateStaff = () => {
                         <option value="Kitchen staff">Kitchen staff</option>
 
                     </select>
-                {!isPending && <button>Add staff</button>}
+                {!isPending && <button className="add-Staff-Button">Add staff</button>}
                 {isPending && <button disabled>Adding staff...</button>}
             </form>
         </div>
