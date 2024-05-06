@@ -1,0 +1,29 @@
+import React from 'react';
+import { render } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Navbar from './Navbar';
+import { UserProvider } from '../../services/UserContext'; // Assuming you have a UserProvider component
+
+// Mocking the useUser hook
+jest.mock('../../services/UserContext', () => ({
+  useUser: jest.fn(() => ({ user: { role: 'Manager' } })), // Mock the user object
+}));
+
+describe('Navbar component', () => {
+  test('renders correct links for Manager role', () => {
+    const { getByText } = render(
+      <Router>
+        <UserProvider>
+          <Navbar />
+        </UserProvider>
+      </Router>
+    );
+
+    expect(getByText('Manager Overview')).toBeInTheDocument();
+    expect(getByText('Configure Menu')).toBeInTheDocument();
+    expect(getByText('Staff Management')).toBeInTheDocument();
+    expect(getByText('Settings')).toBeInTheDocument();
+  });
+
+  // Add similar tests for Waiter and Kitchen roles
+});
