@@ -8,6 +8,8 @@ function CreateOrder() {
     const [currentOrder, setCurrentOrder] = useState([]);
     const [selectedItemId, setSelectedItemId] = useState(null);
 
+
+    // this should be replaced with a call to the backend to get the menu items
     const menuItems = [
         { id: 1, name: 'Pizza', price: 10},
         { id: 2, name: 'Burger', price: 8 },
@@ -42,6 +44,11 @@ function CreateOrder() {
         ));
     };
 
+    const storeOrder = () => {
+        // this is where we need to pass the order to the backend via a service and a POST request using a hook 
+        console.log('Order stored:', currentOrder);
+    };
+
     return (
         <div className="createOrderContainer">
             <h1 className="heading">Create Order</h1>
@@ -56,6 +63,12 @@ function CreateOrder() {
                         >
                             Remove
                         </button>
+                        <button 
+                            className="submitButton"
+                            onClick={storeOrder}
+                            disabled={currentOrder.length === 0}
+                            >
+                                Submit Order</button>
                     </div>
                     <div className="currentOrderList">
                         {currentOrder.map((item) => (
