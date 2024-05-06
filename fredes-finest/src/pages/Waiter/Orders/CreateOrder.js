@@ -2,11 +2,14 @@
 import React, { useState } from 'react';
 import './CreateOrder.css';
 import OrderItems from '../../../Components/OrderItem/OrderItems';
-
+import CustomModal from '../../../Components/Dialogs/Modal';
 
 function CreateOrder() {
+    // hooks
     const [currentOrder, setCurrentOrder] = useState([]);
     const [selectedItemId, setSelectedItemId] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
 
 
     // this should be replaced with a call to the backend to get the menu items
@@ -32,6 +35,8 @@ function CreateOrder() {
     const removeFromOrder = () => {
         setCurrentOrder(currentOrder.filter(item => item.menuItem.id !== selectedItemId));
         setSelectedItemId(null);
+        setIsRemoveModalOpen(true);
+
     };
 
     const handleItemClick = (itemId) => {
@@ -47,7 +52,14 @@ function CreateOrder() {
     const storeOrder = () => {
         // this is where we need to pass the order to the backend via a service and a POST request using a hook 
         console.log('Order stored:', currentOrder);
+        setIsRemoveModalOpen(true);
+
     };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setIsRemoveModalOpen(false);
+      };
 
     return (
         <div className="createOrderContainer">
@@ -63,12 +75,24 @@ function CreateOrder() {
                         >
                             Remove
                         </button>
+                        <CustomModal 
+                                    isOpen={isRemoveModalOpen} 
+                                    onRequestClose={closeModal} 
+                                    >
+                                    Item successfully removed!
+                                    </CustomModal>
                         <button 
                             className="submitButton"
                             onClick={storeOrder}
                             disabled={currentOrder.length === 0}
                             >
                                 Submit Order</button>
+                                <CustomModal 
+                                    isOpen={isModalOpen} 
+                                    onRequestClose={closeModal} 
+                                    >
+                                    Order successfully submitted!
+                                    </CustomModal>
                     </div>
                     <div className="currentOrderList">
                         {currentOrder.map((item) => (
