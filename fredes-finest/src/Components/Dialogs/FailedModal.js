@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import Modal from 'react-modal';
-import './Modal.css';
+import './FailedModal.css';
 
 
-const CustomModal = ({ isOpen, onRequestClose, title, children }) => {
+const FailedModal = ({ isOpen, onRequestClose, title, children }) => {
     useEffect(() => {
         let timer;
         if (isOpen) {
@@ -31,4 +31,4 @@ const CustomModal = ({ isOpen, onRequestClose, title, children }) => {
   );
 };
 
-export default CustomModal;
+export default FailedModal;

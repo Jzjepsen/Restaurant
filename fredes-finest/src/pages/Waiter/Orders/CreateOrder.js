@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import './CreateOrder.css';
 import OrderItems from '../../../Components/OrderItem/OrderItems';
-import CustomModal from '../../../Components/Dialogs/Modal';
+import SuccesModal from '../../../Components/Dialogs/SuccesModal';
+import FailedModal from '../../../Components/Dialogs/FailedModal';
+
 
 function CreateOrder() {
     // hooks
@@ -10,6 +12,8 @@ function CreateOrder() {
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
+    const [isSubmitFailedModalOpen, setIsSubmitFailedModalOpen] = useState(false);
+    const [isAddFailedModalOpen, setIsAddFailedModalOpen] = useState(false);
 
 
     // this should be replaced with a call to the backend to get the menu items
@@ -30,6 +34,9 @@ function CreateOrder() {
             // Add new item
             setCurrentOrder([...currentOrder, { menuItem: menuItem, quantity: 1, comment: '' }]);
         }
+        if (false /* replace with actual condition, for instance if the menu item is marked as Soldout*/) {
+            setIsAddFailedModalOpen(true);
+          }
     };
 
     const removeFromOrder = () => {
@@ -53,12 +60,19 @@ function CreateOrder() {
         // this is where we need to pass the order to the backend via a service and a POST request using a hook 
         console.log('Order stored:', currentOrder);
         setIsRemoveModalOpen(true);
+        if (false /* replace with actual condition for when submitting fails, meaning we need a catch block in the service for orderItems endpoints */) {
+            setIsSubmitFailedModalOpen(true);
+          }
 
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
         setIsRemoveModalOpen(false);
+        setIsSubmitFailedModalOpen(false);
+        setIsAddFailedModalOpen(false);
+
+
       };
 
     return (
@@ -75,24 +89,30 @@ function CreateOrder() {
                         >
                             Remove
                         </button>
-                        <CustomModal 
+                        <SuccesModal 
                                     isOpen={isRemoveModalOpen} 
                                     onRequestClose={closeModal} 
                                     >
                                     Item successfully removed!
-                                    </CustomModal>
+                                    </SuccesModal>
                         <button 
                             className="submitButton"
                             onClick={storeOrder}
                             disabled={currentOrder.length === 0}
                             >
-                                Submit Order</button>
-                                <CustomModal 
-                                    isOpen={isModalOpen} 
-                                    onRequestClose={closeModal} 
-                                    >
-                                    Order successfully submitted!
-                                    </CustomModal>
+                            Submit Order</button>
+                            <SuccesModal 
+                                isOpen={isModalOpen} 
+                                onRequestClose={closeModal} 
+                                >
+                                Order successfully submitted!
+                            </SuccesModal>
+                            <FailedModal 
+                                isOpen={isSubmitFailedModalOpen} 
+                                onRequestClose={closeModal} 
+                                >
+                                Order submission failed!
+                            </FailedModal>
                     </div>
                     <div className="currentOrderList">
                         {currentOrder.map((item) => (
@@ -113,6 +133,12 @@ function CreateOrder() {
                         </div>
                     ))}
                 </div>
+                <FailedModal 
+                    isOpen={isAddFailedModalOpen} 
+                    onRequestClose={closeModal} 
+                    >
+                    Menu item was not added to the order!                
+                </FailedModal>
             </div>
         </div>
     );
