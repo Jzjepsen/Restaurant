@@ -1,23 +1,25 @@
 import CreateStaff from "../StaffManagement/CreateStaff";
-import useFetch from "../../../services/useFetch";
-import StaffMember from "../StaffManagement/StaffMember";
+import StaffList from "./StaffList";
+import './StaffManagement.css';
 
 const StaffManagement = () => {
-    const { data: staffs, isPending, error } = useFetch('http://localhost:8000/staffs');
-
-    return (
-        <div>
-            <h1 className="pageTitle">Configure staff</h1>
-            <div className="Staff">
-                { error && <div>{ error }</div>}
-                { isPending && <div>Loading...</div>}
-                { staffs && <StaffMember staffs={staffs} /> }
+    const staffData = [
+        { firstName: 'Søren', lastName: 'Hansen', age: '44', email: 'shansen@gmail.com' },
+        { firstName: 'Marcus', lastName: 'Milo', age: '25', email: 'milo@gmail.com' },
+        { firstName: 'Rasmus', lastName: 'Pedersen', age: '25', email: 'rasmus1311@live.dk' }
+      ];
+    
+      return (
+        <div className="staff-management-container">
+            <div className="staff-list-container">
+                <h2>Staff List</h2>
+                <StaffList staff={staffData} />
             </div>
-            <div>
-                <CreateStaff/>
+            <div className="create-staff-container">
+                <CreateStaff />
             </div>
         </div>
-    );
-}
+      );
+    }
  
 export default StaffManagement;

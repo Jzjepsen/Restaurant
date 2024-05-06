@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const CreateMenu = () => {
+const CreateStaff = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [age, setAge] = useState('');
@@ -56,10 +56,10 @@ const CreateMenu = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <select
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    >
+                <label>Staff role:</label>
+                <select>
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                         <option value="Waiter">Waiter</option>
                         <option value="Kitchen staff">Kitchen staff</option>
 
@@ -71,4 +71,4 @@ const CreateMenu = () => {
      );
 }
  
-export default CreateMenu;
+export default CreateStaff;
