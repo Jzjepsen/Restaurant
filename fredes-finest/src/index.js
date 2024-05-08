@@ -5,16 +5,19 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { UserProvider } from './services/UserContext';
 import { MenuProvider } from './services/MenuContext';
+import { StaffProvider} from './services/StaffContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserProvider>
-      <MenuProvider>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
-    </MenuProvider>
+      <StaffProvider>
+        <MenuProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </MenuProvider>
+      </StaffProvider>
     </UserProvider>
   </React.StrictMode>
 );
