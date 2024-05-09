@@ -20,7 +20,7 @@ const FailedModal = ({ isOpen, onRequestClose, title, children }) => {
       onRequestClose={onRequestClose}
       contentLabel={title}
       ariaHideApp={false}
-      className="modalContent"
+      className="failedModalContent"
       shouldCloseOnOverlayClick={true} 
     >
       <h2>{title}</h2>

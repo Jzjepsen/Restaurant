@@ -10,7 +10,7 @@ function CreateOrder() {
     // hooks
     const [currentOrder, setCurrentOrder] = useState([]);
     const [selectedItemId, setSelectedItemId] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSubmitModalOpen, setSubmitSuccessfulOpen] = useState(false);
     const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
     const [isSubmitFailedModalOpen, setIsSubmitFailedModalOpen] = useState(false);
     const [isAddFailedModalOpen, setIsAddFailedModalOpen] = useState(false);
@@ -59,7 +59,7 @@ function CreateOrder() {
     const storeOrder = () => {
         // this is where we need to pass the order to the backend via a service and a POST request using a hook 
         console.log('Order stored:', currentOrder);
-        setIsRemoveModalOpen(true);
+        setSubmitSuccessfulOpen(true);
         if (false /* replace with actual condition for when submitting fails, meaning we need a catch block in the service for orderItems endpoints */) {
             setIsSubmitFailedModalOpen(true);
           }
@@ -67,7 +67,7 @@ function CreateOrder() {
     };
 
     const closeModal = () => {
-        setIsModalOpen(false);
+        setSubmitSuccessfulOpen(false);
         setIsRemoveModalOpen(false);
         setIsSubmitFailedModalOpen(false);
         setIsAddFailedModalOpen(false);
@@ -102,7 +102,7 @@ function CreateOrder() {
                             >
                             Submit Order</button>
                             <SuccesModal 
-                                isOpen={isModalOpen} 
+                                isOpen={isSubmitModalOpen} 
                                 onRequestClose={closeModal} 
                                 >
                                 Order successfully submitted!

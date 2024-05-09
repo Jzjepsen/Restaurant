@@ -20,7 +20,7 @@ const SuccesModal = ({ isOpen, onRequestClose, title, children }) => {
       onRequestClose={onRequestClose}
       contentLabel={title}
       ariaHideApp={false}
-      className="modalContent"
+      className="successModalContent"
       shouldCloseOnOverlayClick={true} 
     >
       <h2>{title}</h2>
