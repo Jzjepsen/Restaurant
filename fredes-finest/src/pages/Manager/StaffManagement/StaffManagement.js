@@ -4,9 +4,9 @@ import './StaffManagement.css';
 
 const StaffManagement = () => {
     const staffData = [
-        { firstName: 'Søren', lastName: 'Hansen', age: '44', email: 'shansen@gmail.com' },
-        { firstName: 'Marcus', lastName: 'Milo', age: '25', email: 'milo@gmail.com' },
-        { firstName: 'Rasmus', lastName: 'Pedersen', age: '25', email: 'rasmus1311@live.dk' }
+        { firstName: 'Søren', lastName: 'Hansen', age: '44', email: 'shansen@gmail.com', role: 'Kitchen staff' },
+        { firstName: 'Marcus', lastName: 'Milo', age: '25', email: 'milo@gmail.com', role: 'Kitchen staff' },
+        { firstName: 'Rasmus', lastName: 'Pedersen', age: '25', email: 'rasmus1311@live.dk', role: 'Manager' }
       ];
     
       return (
