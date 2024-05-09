@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import './StaffManagement.css';
 
-const CreateMenu = () => {
+const CreateStaff = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [age, setAge] = useState('');
@@ -56,19 +57,19 @@ const CreateMenu = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <select
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    >
+                <label>Staff role:</label>
+                <select>
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                         <option value="Waiter">Waiter</option>
                         <option value="Kitchen staff">Kitchen staff</option>
 
                     </select>
-                {!isPending && <button>Add staff</button>}
+                {!isPending && <button className="add-Staff-Button">Add staff</button>}
                 {isPending && <button disabled>Adding staff...</button>}
             </form>
         </div>
      );
 }
  
-export default CreateMenu;
+export default CreateStaff;
