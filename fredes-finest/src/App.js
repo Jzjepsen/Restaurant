@@ -4,7 +4,7 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './pages/Home/home';
 import { useUser } from './services/UserContext';
 import ManagerOverview from './pages/Manager/Overview';
-import ManagerConfigureMenu from './pages/Manager/ConfigureMenu/CreateMenu';
+import CreateMenu from './pages/Manager/Menu/CreateMenu';
 import StaffManagement from './pages/Manager/StaffManagement/StaffManagement';
 import Settings from './pages/Manager/Settings/settings';
 import Bookings from './pages/Waiter/Bookings/bookings';
@@ -26,7 +26,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path="*" element={<Navigate replace to="/" />} />  
         <Route path='/Manager/Overview' element={<ManagerOverview />} />
-        <Route path='/Manager/ConfigureMenu' element={<ManagerConfigureMenu />} />
+        <Route path='/Manager/CreateMenu' element={<CreateMenu />} />
         <Route path='/Manager/StaffManagement' element={<StaffManagement />} />
         <Route path='/Manager/Settings' element={<Settings />} />
         <Route path='/Waiter/Overview' element={<WaiterOverview />} />

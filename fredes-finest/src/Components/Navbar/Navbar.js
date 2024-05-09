@@ -12,7 +12,7 @@ const Navbar = () => {
         return (
           <>
               <Link to="/Manager/Overview" className={styles.link}>Manager Overview</Link>
-              <Link to="/Manager/ConfigureMenu" className={styles.link}>Configure Menu</Link>
+              <Link to="/Manager/CreateMenu" className={styles.link}>Create Menu</Link>
               <Link to="/Manager/StaffManagement" className={styles.link}>Staff Management</Link>        
               <Link to="/Manager/Settings" className={styles.link}>Settings</Link>        
           </>
