@@ -2,15 +2,15 @@ import React from 'react';
 import { useMenu } from '../../../services/MenuContext'; 
 import Menu from '../../../Components/Menu/Menu';
 
-function MenuView() {
+function WaiterMenuView() {
     const { menuItems } = useMenu();
 
     return (
         <div>
             <h1>Menu</h1>
-            <Menu menuItems={menuItems} showSoldOutStatus={true} /> {/* Do not pass onSoldOutChange prop */}
+            <Menu menuItems={menuItems} showSoldOutStatus={true} />
         </div>
     );
 }
 
-export default MenuView;
+export default WaiterMenuView;
