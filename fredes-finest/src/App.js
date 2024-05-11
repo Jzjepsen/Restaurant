@@ -12,7 +12,8 @@ import KitchenOverview from './pages/Kitchen/Overview/Overview';
 import WaiterOverview from './pages/Waiter/Overview/Overview';
 import CreateOrder from './pages/Waiter/Orders/CreateOrder';
 import Payment from './pages/Waiter/Payment/Payment';
-import MenuView from './pages/Waiter/Menu/MenuView';
+import WaiterMenuView from './pages/Waiter/Menu/WaiterMenuView';
+import ManagerMenuView from './pages/Manager/Menu/ManagerMenuView';
 import OrderView from './pages/Waiter/Orders/Order';
 
 function App() {
@@ -26,12 +27,12 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path="*" element={<Navigate replace to="/" />} />  
         <Route path='/Manager/Overview' element={<ManagerOverview />} />
-        <Route path='/Manager/CreateMenu' element={<CreateMenu />} />
+        <Route path='/Manager/Menu' element={<ManagerMenuView />} />
         <Route path='/Manager/StaffManagement' element={<StaffManagement />} />
         <Route path='/Manager/Settings' element={<Settings />} />
         <Route path='/Waiter/Overview' element={<WaiterOverview />} />
         <Route path='/Waiter/Bookings' element={<Bookings />} />
-        <Route path='/Waiter/Menu' element={<MenuView />} />
+        <Route path='/Waiter/Menu' element={<WaiterMenuView />} />
         <Route path='/Waiter/Orders' element={<OrderView />} />
         <Route path='/Waiter/Orders/CreateOrder' element={<CreateOrder />} />
         <Route path='/Waiter/Payment/Payment' element={<Payment />} />
