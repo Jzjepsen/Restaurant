@@ -4,7 +4,8 @@ import './CreateOrder.css';
 import OrderItems from '../../../Components/OrderItem/OrderItems';
 import SuccesModal from '../../../Components/Dialogs/SuccesModal';
 import FailedModal from '../../../Components/Dialogs/FailedModal';
-
+import Menu from '../../../Components/Menu/Menu';
+import { useMenu } from '../../../services/MenuContext';
 
 function CreateOrder() {
     // hooks
@@ -14,29 +15,25 @@ function CreateOrder() {
     const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
     const [isSubmitFailedModalOpen, setIsSubmitFailedModalOpen] = useState(false);
     const [isAddFailedModalOpen, setIsAddFailedModalOpen] = useState(false);
+    const { menuItems } = useMenu();
 
-
-    // this should be replaced with a call to the backend to get the menu items
-    const menuItems = [
-        { id: 1, name: 'Pizza', price: 10},
-        { id: 2, name: 'Burger', price: 8 },
-        // Add more items as needed
-    ];
 
     const addToOrder = (menuItem) => {
+        if(menuItem.isSoldOut) {
+            setIsAddFailedModalOpen(true);
+        }
+        else{
         const existingItem = currentOrder.find(item => item.menuItem.id === menuItem.id);
         if (existingItem) {
-            // Increase the quantity
+            // Increase the quantity of the existing item
             setCurrentOrder(currentOrder.map(item =>
-                item.menuItem.id === menuItem.id ? { ...item, quantity: item.quantity + 1 } : item
+                item.menuItem.id === menuItem.id? {...item, quantity: item.quantity + 1} : item
             ));
         } else {
-            // Add new item
+            // Add a new item to the order
             setCurrentOrder([...currentOrder, { menuItem: menuItem, quantity: 1, comment: '' }]);
         }
-        if (false /* replace with actual condition, for instance if the menu item is marked as Soldout*/) {
-            setIsAddFailedModalOpen(true);
-          }
+        }
     };
 
     const removeFromOrder = () => {
@@ -126,18 +123,13 @@ function CreateOrder() {
                     </div>
                 </div>
                 <div className="menuColumn">
-                    <h2>Menu Items</h2>
-                    {menuItems.map((item) => (
-                        <div key={item.id} onClick={() => addToOrder(item)}>
-                            <p>{item.name} - ${item.price}</p>
-                        </div>
-                    ))}
+                <Menu menuItems={menuItems} addToOrder={addToOrder} showSoldOutStatus={true} />
                 </div>
                 <FailedModal 
                     isOpen={isAddFailedModalOpen} 
                     onRequestClose={closeModal} 
                     >
-                    Menu item was not added to the order!                
+                    Menu item sold out!                
                 </FailedModal>
             </div>
         </div>

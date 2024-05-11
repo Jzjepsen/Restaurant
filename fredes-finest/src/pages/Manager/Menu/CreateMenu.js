@@ -1,15 +1,25 @@
 import './CreateMenu.css';
 import { useMenu } from '../../../services/MenuContext';
+import React, { useState } from 'react';
+
 
 const CreateMenu = () => {
-    const { name, description, price, timeToCook, isPending, setName, setDescription, setPrice, setTimeToCook, setIsPending, addMenuItem } = useMenu();
+    const { addMenuItem } = useMenu();
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [timeToCook, setTimeToCook] = useState('');
+    const [isSoldOut, setIsSoldOut] = useState(false);
+    const [isPending, setIsPending] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newMenuItem = { name, description, price, timeToCook };
+        setIsPending(true); 
+        const newMenuItem = { name, description, price, timeToCook, isSoldOut };
 
-        addMenuItem(newMenuItem);
-    }
+        addMenuItem(newMenuItem).then(() => {
+            setIsPending(false); // Reset isPending after submission
+        });    }
 
     return ( 
         <div className="createMenu">
@@ -54,7 +64,7 @@ const CreateMenu = () => {
                     <option value="55">55</option>
                     <option value="60">60</option>
                 </select>
-                {!isPending && <button>Add menu</button>}
+                {!isPending && <button type="submit">Add menu</button>}
                 {isPending && <button disabled>Adding menu...</button>}
             </form>
         </div>
