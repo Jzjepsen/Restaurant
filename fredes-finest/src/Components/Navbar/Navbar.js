@@ -33,7 +33,13 @@ const Navbar = () => {
           </>
           );
           default:
-            return null;
+            return (
+              <>
+              <Link to="/Guest/Booking" className={styles.link}>Book Now</Link>
+              <Link to="/Guest/Menu" className={styles.link}>Menu</Link>
+              </>
+
+            );
   }
 };
   return (

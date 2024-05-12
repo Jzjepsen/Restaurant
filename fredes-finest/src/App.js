@@ -14,6 +14,8 @@ import CreateOrder from './pages/Waiter/Orders/CreateOrder';
 import Payment from './pages/Waiter/Payment/Payment';
 import MenuView from './pages/Waiter/Menu/MenuView';
 import OrderView from './pages/Waiter/Orders/Order';
+import MenuGuest from './pages/Guest/MenuGuest';
+import Booking from './pages/Guest/Booking';
 
 function App() {
   // This user context is used to determine what to render in Navbar
@@ -36,6 +38,8 @@ function App() {
         <Route path='/Waiter/Orders/CreateOrder' element={<CreateOrder />} />
         <Route path='/Waiter/Payment/Payment' element={<Payment />} />
         <Route path='/Kitchen/Overview' element={<KitchenOverview />} />
+        <Route path='/Guest/Menu' element={<MenuGuest />} />  
+        <Route path='/Guest/Booking' element={<Booking />} />
       </Routes>
     </div>
   );
