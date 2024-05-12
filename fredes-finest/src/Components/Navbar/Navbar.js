@@ -15,7 +15,7 @@ const Navbar = () => {
               <Link to="/Manager/ConfigureMenu" className={styles.link}>Configure Menu</Link>
               <Link to="/Manager/StaffManagement" className={styles.link}>Staff Management</Link>        
               <Link to="/Manager/Settings" className={styles.link}>Settings</Link>        
-          </>
+          </> 
           );
       case 'Waiter':
         return (
@@ -37,6 +37,7 @@ const Navbar = () => {
               <>
               <Link to="/Guest/Booking" className={styles.link}>Book Now</Link>
               <Link to="/Guest/Menu" className={styles.link}>Menu</Link>
+              <Link to="/Guest/Help" className={styles.link}>Help me!</Link> 
               </>
 
             );

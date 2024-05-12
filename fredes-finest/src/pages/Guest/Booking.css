@@ -41,13 +41,20 @@ p {
 
 .next-button {
     padding: 10px 20px;
-    background-color: black;
+    background-color: #17B169;
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 25px;
     border: none;
+    margin: 200px;
 }
 
 .next-button:hover {
     background-color: #333;
+}
+
+.phone-number {
+    display: block;
+    color: #007BFF;
+    margin-bottom: 50px;
 }
