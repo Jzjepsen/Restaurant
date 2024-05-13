@@ -1,5 +1,7 @@
 import React from 'react';
 import Darkmode from '../../../Components/Darkmode/Darkmode';
+import '../../../App.css';
+
 
 function Settings() {
     return (

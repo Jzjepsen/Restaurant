@@ -5,7 +5,13 @@
 }
 
 [data-theme="dark"] {
-    --body_background: black;
+    --body_background: grey;
     --body_color: white;
     --link_color: cyan;
+}
+
+[data-theme="light"] {
+    --body_background: white;
+    --body_color: black;
+    --link_color: navy;
 }

@@ -25,7 +25,7 @@ const Darkmode = () => {
                 id="dark-mode-toggle"
                 onChange={toggleTheme}
             />
-            <label className="dark-mode-label" for="dark-mode-toggle"/>
+            <label className="dark-mode-label" htmlFor="dark-mode-toggle"/>
         </div>
      );
 }
