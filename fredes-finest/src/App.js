@@ -14,7 +14,7 @@ import CreateOrder from './pages/Waiter/Orders/CreateOrder';
 import Payment from './pages/Waiter/Payment/Payment';
 import WaiterMenuView from './pages/Waiter/Menu/WaiterMenuView';
 import ManagerMenuView from './pages/Manager/Menu/ManagerMenuView';
-import OrderView from './pages/Waiter/Orders/Order';
+import OrderView from './pages/Waiter/Orders/OrderView';
 
 function App() {
   // This user context is used to determine what to render in Navbar
