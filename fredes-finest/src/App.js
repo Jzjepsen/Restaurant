@@ -41,6 +41,7 @@ function App() {
         <Route path='/Waiter/Orders/CreateOrder' element={<CreateOrder />} />
         <Route path='/Waiter/Payment/Payment' element={<Payment />} />
         <Route path='/Kitchen/Overview' element={<KitchenOverview />} />
+        <Route path='/Kitchen/Orders' element={<OrderView />} />
         <Route path='/Guest/Menu' element={<MenuGuest />} />  
         <Route path='/Guest/Booking' element={<Booking />} />
         <Route path='/Guest/Help' element={<Help />} />
