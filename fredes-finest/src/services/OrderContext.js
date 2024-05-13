@@ -16,13 +16,18 @@ const dummyOrderItems = [
   const [currentOrder, setCurrentOrder] = useState([]);
   const [orderItems, setOrderItems] = useState(dummyOrderItems);
 
-
+  const updateOrderStatus = (id, newStatus) => {
+    console.log('Updating status for item with id:', id, 'to:', newStatus);
+    setOrderItems((prevItems) => 
+      prevItems.map(item => item.id === id? {...item, status: newStatus} : item)
+    );
+  };
   const addOrderItem = (item) => {
     setOrderItems((prevItems) => [...prevItems, {...item, comment: '' }]); // Initialize comment as empty string
   };
 
   return (
-    <OrderContext.Provider value={{ currentOrder, setCurrentOrder, orderItems, addOrderItem  }}>
+    <OrderContext.Provider value={{ currentOrder, setCurrentOrder, orderItems, addOrderItem, updateOrderStatus  }}>
       {children}
     </OrderContext.Provider>
   );

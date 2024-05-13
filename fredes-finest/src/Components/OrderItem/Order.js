@@ -1,5 +1,7 @@
 // Order.js
-function Order({ status, menuItem, quantity, comment }) {
+function Order({ status, menuItem, quantity, comment, id, updateStatus }) {
+  console.log('Order component received updateStatus:', updateStatus);
+
   return (
     <div className="orderItem">
       <div className="orderHeader">
@@ -9,6 +11,12 @@ function Order({ status, menuItem, quantity, comment }) {
       <p>Quantity: {quantity}</p>
       <p>Price: {menuItem.price}</p>
       {comment && <p>Comment: {comment}</p>}
+      {status === 'new order' && (
+        <button onClick={() => updateStatus(id, 'preparing')}>Start Preparing</button>
+      )}
+        {status === 'preparing' && (
+        <button onClick={() => updateStatus(id, 'done')}>Mark as Done</button>
+      )}
     </div>
   );
 }
