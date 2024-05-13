@@ -1,15 +1,30 @@
 import React from 'react';
-import { useOrder } from '../../../services/OrderContext';
-import Order from '../../../Components/OrderItem/Order';
+import Order from '../../Components/OrderItem/Order';
+import './OrderView.css'; // Import the CSS file
+import { useOrder } from '../../services/OrderContext';
 
-function OrderView() {
+function KitchenOrderView() {
+    const { orderItems } = useOrder();
 
-  return (
-    <div>
-      <h1>Orders</h1>
-      <Order/>
-    </div>
-  );
-}
+    return (   
+    <div className="order-view-container">
+        <h1>Orders</h1> 
+        <div className="order-column-container">
+            <div className="order-column">
+                <h2>New Order</h2>
+                {orderItems.filter(item=>item.status === 'new order').map(item=>(
+                    <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} />
+                ))}
+                </div>
+                <div className="order-column">
+                    <h2>Preparing</h2>
+                    {orderItems.filter(item => item.status === 'preparing').map(item => (
+                        <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} />
+                    ))}            
+                </div>
+            </div>
+        </div>
+      );
+    }
 
-export default OrderView;
+export default KitchenOrderView;

@@ -20,7 +20,7 @@ function CreateOrder() {
     const { menuItems } = useMenu();
 
 
-    const addToOrder = (menuItem) => {
+    const addToOrder = (menuItem, comment) => {
         if(menuItem.isSoldOut) {
             setIsAddFailedModalOpen(true);
         }

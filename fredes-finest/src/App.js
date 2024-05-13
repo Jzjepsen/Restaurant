@@ -18,7 +18,7 @@ import Help from './pages/Guest/Help';
 import WaiterMenuView from './pages/Waiter/Menu/WaiterMenuView';
 import ManagerMenuView from './pages/Manager/Menu/ManagerMenuView';
 import OrderView from './pages/Waiter/Orders/OrderView';
-
+import KitchenOrderView from './pages/Kitchen/OrderView';
 
 function App() {
   // This user context is used to determine what to render in Navbar
@@ -41,7 +41,7 @@ function App() {
         <Route path='/Waiter/Orders/CreateOrder' element={<CreateOrder />} />
         <Route path='/Waiter/Payment/Payment' element={<Payment />} />
         <Route path='/Kitchen/Overview' element={<KitchenOverview />} />
-        <Route path='/Kitchen/Orders' element={<OrderView />} />
+        <Route path='/Kitchen/Orders' element={<KitchenOrderView />} />
         <Route path='/Guest/Menu' element={<MenuGuest />} />  
         <Route path='/Guest/Booking' element={<Booking />} />
         <Route path='/Guest/Help' element={<Help />} />
