@@ -1,0 +1,11 @@
+:root {
+    --body_background: white;
+    --body_color: black;
+    --link_color: navy;
+}
+
+[data-theme="dark"] {
+    --body_background: black;
+    --body_color: white;
+    --link_color: cyan;
+}
