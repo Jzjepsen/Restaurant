@@ -1,5 +1,3 @@
-// Booking.js
-
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
@@ -9,6 +7,7 @@ import './Booking.css';
 const Booking = () => {
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedTimeslot, setSelectedTimeslot] = useState('');
 
     // Increment the number of people (up to a maximum of 4)
     const incrementCount = () => {
@@ -21,7 +20,21 @@ const Booking = () => {
     };
 
     // Determine whether the "Next" button should be enabled
-    const isNextButtonEnabled = selectedDate !== null && numberOfPeople >= 1;
+    const isNextButtonEnabled = selectedDate !== null && numberOfPeople >= 1 && selectedTimeslot !== '';
+
+    const generateTimeslots = () => {
+        const startHour = 17; // 17:00
+        const endHour = 22; // 22:00
+        let timeslots = [];
+
+        for (let hour = startHour; hour <= endHour; hour++) {
+            timeslots.push(`${hour}:00`);
+        }
+
+        return timeslots;
+    };
+
+    const timeslots = generateTimeslots();
 
     return (
         <div className="booking-container">
@@ -44,15 +57,33 @@ const Booking = () => {
                 dateFormat="MMMM d, yyyy"
                 className="date-picker"
             />
+            {selectedDate && (
+                <>
+                    <h3>Select a timeslot:</h3>
+                    <div className="timeslot-buttons">
+                        {timeslots.map((timeslot, index) => (
+                            <button
+                                key={index}
+                                className={`timeslot-button ${selectedTimeslot === timeslot ? 'selected' : ''}`}
+                                onClick={() => setSelectedTimeslot(timeslot)}
+                            >
+                                {timeslot}
+                            </button>
+                        ))}
+                    </div>
+                </>
+            )}
             <div>
                 <p>The reservation is not confirmed until you receive a confirmation email from us.</p>
                 <p>For groups of more than 4, please contact us on this number:</p>
                 <Link to="tel:+4523305149" className="phone-number">+45 2330 5149</Link>
             </div>
             {/* Conditional rendering for the "Next" button */}
-            <Link to={isNextButtonEnabled ? "/booking/date" : "#"} className={`next-button ${isNextButtonEnabled ? '' : 'disabled'}`}>
-                NEXT →
-            </Link>
+            {selectedTimeslot && (
+                <Link to={isNextButtonEnabled ? "/Guest/Booking/ChooseTime" : "#"} className={`next-button ${isNextButtonEnabled ? '' : 'disabled'}`}>
+                    NEXT →
+                </Link>
+            )}
         </div>
     );
 }
