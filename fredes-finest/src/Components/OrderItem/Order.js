@@ -1,5 +1,5 @@
 // Order.js
-function Order({ status, menuItem, quantity, comment, id, updateStatus }) {
+function Order({ status, menuItem, quantity, comment, id, updateStatus, isKitchenView}) {
   console.log('Order component received updateStatus:', updateStatus);
 
   return (
@@ -11,10 +11,10 @@ function Order({ status, menuItem, quantity, comment, id, updateStatus }) {
       <p>Quantity: {quantity}</p>
       <p>Price: {menuItem.price}</p>
       {comment && <p>Comment: {comment}</p>}
-      {status === 'new order' && (
+      {isKitchenView && status === 'new order' && (
         <button onClick={() => updateStatus(id, 'preparing')}>Start Preparing</button>
       )}
-        {status === 'preparing' && (
+      {isKitchenView && status === 'preparing' && (
         <button onClick={() => updateStatus(id, 'done')}>Mark as Done</button>
       )}
     </div>

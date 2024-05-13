@@ -11,6 +11,8 @@ const dummyOrderItems = [
   { id: 2, status: 'preparing', menuItem: { name: 'Spaghetti Bolognese', price: 8 }, quantity: 1, comment: 'No onions' },
   { id: 3, status: 'new order', menuItem: { name: 'Tiramisu', price: 5 }, quantity: 3, comment: 'Extra sugar' },
   { id: 4, status: 'preparing', menuItem: { name: 'Fettuccine Alfredo', price: 12 }, quantity: 4, comment: 'Extra garlic' },
+  { id: 5, status: 'done', menuItem: { name: 'Chiops Alfredo', price: 6 }, quantity: 3, comment: 'Extra garlic' },
+
 ];
 
   const [currentOrder, setCurrentOrder] = useState([]);

@@ -17,7 +17,7 @@ import Help from './pages/Guest/Help';
 
 import WaiterMenuView from './pages/Waiter/Menu/WaiterMenuView';
 import ManagerMenuView from './pages/Manager/Menu/ManagerMenuView';
-import OrderView from './pages/Waiter/Orders/OrderView';
+import WaiterOrderView from './pages/Waiter/Orders/OrderView';
 import KitchenOrderView from './pages/Kitchen/OrderView';
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
         <Route path='/Waiter/Overview' element={<WaiterOverview />} />
         <Route path='/Waiter/Bookings' element={<Bookings />} />
         <Route path='/Waiter/Menu' element={<WaiterMenuView />} />
-        <Route path='/Waiter/Orders' element={<OrderView />} />
+        <Route path='/Waiter/Orders' element={<WaiterOrderView />} />
         <Route path='/Waiter/Orders/CreateOrder' element={<CreateOrder />} />
         <Route path='/Waiter/Payment/Payment' element={<Payment />} />
         <Route path='/Kitchen/Overview' element={<KitchenOverview />} />
