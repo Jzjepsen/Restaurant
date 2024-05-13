@@ -6,10 +6,12 @@ import SuccesModal from '../../../Components/Dialogs/SuccesModal';
 import FailedModal from '../../../Components/Dialogs/FailedModal';
 import Menu from '../../../Components/Menu/Menu';
 import { useMenu } from '../../../services/MenuContext';
+import { useOrder } from '../../../services/OrderContext';
+
 
 function CreateOrder() {
     // hooks
-    const [currentOrder, setCurrentOrder] = useState([]);
+    const { currentOrder, setCurrentOrder } = useOrder(); // Access currentOrder and setCurrentOrder from context
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [isSubmitModalOpen, setSubmitSuccessfulOpen] = useState(false);
     const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);

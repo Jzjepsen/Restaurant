@@ -29,8 +29,8 @@ const CreateStaff = () => {
         <div className="createStaff">
             <h2> Add a new staff member</h2>
             <form onSubmit={handleSubmit}>
-                <label>First name:</label>
-                <input 
+                <label>First name: </label>
+                <input
                     type="text"
                     required
                     value={firstName}
@@ -38,7 +38,7 @@ const CreateStaff = () => {
                 />
                 <label>Last name:</label>
                 <input 
-                    type="text"
+                    type="text" 
                     required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
