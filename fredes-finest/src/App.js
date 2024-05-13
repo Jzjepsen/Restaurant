@@ -4,7 +4,6 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './pages/Home/home';
 import { useUser } from './services/UserContext';
 import ManagerOverview from './pages/Manager/Overview';
-import CreateMenu from './pages/Manager/Menu/CreateMenu';
 import StaffManagement from './pages/Manager/StaffManagement/StaffManagement';
 import Settings from './pages/Manager/Settings/settings';
 import Bookings from './pages/Waiter/Bookings/bookings';
@@ -12,9 +11,6 @@ import KitchenOverview from './pages/Kitchen/Overview/Overview';
 import WaiterOverview from './pages/Waiter/Overview/Overview';
 import CreateOrder from './pages/Waiter/Orders/CreateOrder';
 import Payment from './pages/Waiter/Payment/Payment';
-
-import MenuView from './pages/Waiter/Menu/MenuView';
-
 import MenuGuest from './pages/Guest/MenuGuest';
 import Booking from './pages/Guest/Booking';
 import Help from './pages/Guest/Help';
