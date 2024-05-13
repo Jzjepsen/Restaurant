@@ -12,13 +12,9 @@ import KitchenOverview from './pages/Kitchen/Overview/Overview';
 import WaiterOverview from './pages/Waiter/Overview/Overview';
 import CreateOrder from './pages/Waiter/Orders/CreateOrder';
 import Payment from './pages/Waiter/Payment/Payment';
-
-import MenuView from './pages/Waiter/Menu/MenuView';
-
 import MenuGuest from './pages/Guest/MenuGuest';
 import Booking from './pages/Guest/Booking';
 import Help from './pages/Guest/Help';
-
 import WaiterMenuView from './pages/Waiter/Menu/WaiterMenuView';
 import ManagerMenuView from './pages/Manager/Menu/ManagerMenuView';
 import OrderView from './pages/Waiter/Orders/OrderView';
