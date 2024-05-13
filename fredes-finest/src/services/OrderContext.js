@@ -1,11 +1,21 @@
 import React, { createContext, useContext, useState } from 'react';
+import { useEffect } from 'react';
 
 const OrderContext = createContext();
 
 export const useOrder = () => useContext(OrderContext);
 
 export const OrderProvider = ({ children }) => {
-  const [currentOrder, setCurrentOrder] = useState([]);
+  // Initialize currentOrder with dummy data
+  // Inside the OrderProvider component in OrderContext.js
+useEffect(() => {
+  fetchOrders();
+}, []);
+  const [currentOrder, setCurrentOrder] = useState([
+      { menuItem: { id: 1, name: "Pizza Margherita", price: 10, TimeToCook: "20 minutes", isSoldOut: false }, quantity: 1, comment: '' },
+      { menuItem: { id: 2, name: "Spaghetti Bolognese", price: 8, TimeToCook: "30 minutes", isSoldOut: false }, quantity: 2, comment: 'Extra spicy' },
+      { menuItem: { id: 3, name: "Chicken Parmesan", price: 12, TimeToCook: "25 minutes", isSoldOut: false }, quantity: 1, comment: '' }
+  ]);
 
   const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);

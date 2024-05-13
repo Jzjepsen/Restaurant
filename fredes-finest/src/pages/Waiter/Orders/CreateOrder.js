@@ -11,6 +11,7 @@ import { useOrder } from '../../../services/OrderContext';
 
 function CreateOrder() {
     // hooks
+    const { addOrder } = useOrder(); 
     const { currentOrder, setCurrentOrder } = useOrder(); // Access currentOrder and setCurrentOrder from context
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [isSubmitModalOpen, setSubmitSuccessfulOpen] = useState(false);
@@ -25,16 +26,16 @@ function CreateOrder() {
             setIsAddFailedModalOpen(true);
         }
         else{
-        const existingItem = currentOrder.find(item => item.menuItem.id === menuItem.id);
+            const existingItem = currentOrder.find(item => item.menuItem.id === menuItem.id);
         if (existingItem) {
             // Increase the quantity of the existing item
             setCurrentOrder(currentOrder.map(item =>
                 item.menuItem.id === menuItem.id? {...item, quantity: item.quantity + 1} : item
             ));
-        } else {
+            } else {
             // Add a new item to the order
-            setCurrentOrder([...currentOrder, { menuItem: menuItem, quantity: 1, comment: '' }]);
-        }
+                setCurrentOrder([...currentOrder, { menuItem: menuItem, quantity: 1, comment: '' }]);
+            }
         }
     };
 
@@ -55,14 +56,16 @@ function CreateOrder() {
         ));
     };
 
-    const storeOrder = () => {
-        // this is where we need to pass the order to the backend via a service and a POST request using a hook 
+    const submitOrder = () => {
+        // Log the order to the console
         console.log('Order stored:', currentOrder);
         setSubmitSuccessfulOpen(true);
-        if (false /* replace with actual condition for when submitting fails, meaning we need a catch block in the service for orderItems endpoints */) {
+        addOrder(currentOrder).then(() => {
+            console.log('Order submitted successfully');
+        }).catch((error) => {
+            console.error('Error submitting order:', error);
             setIsSubmitFailedModalOpen(true);
-          }
-
+        });
     };
 
     const closeModal = () => {
@@ -70,9 +73,7 @@ function CreateOrder() {
         setIsRemoveModalOpen(false);
         setIsSubmitFailedModalOpen(false);
         setIsAddFailedModalOpen(false);
-
-
-      };
+    };
 
     return (
         <div className="createOrderContainer">
@@ -96,7 +97,7 @@ function CreateOrder() {
                                     </SuccesModal>
                         <button 
                             className="submitButton"
-                            onClick={storeOrder}
+                            onClick={submitOrder}
                             disabled={currentOrder.length === 0}
                             >
                             Submit Order</button>
