@@ -9,6 +9,7 @@
     margin-bottom: 10px; /* Add some space between menu items */
     padding: 10px;
     border-radius: 5px;
+    width: fill-available; /* Make the menu items take up the full width */
 }
 
 .menu-item.sold-out {

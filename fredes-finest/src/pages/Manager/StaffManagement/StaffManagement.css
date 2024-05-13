@@ -1,0 +1,37 @@
+/* StaffManagement.css */
+.staff-management-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.staff-list-container,
+.create-staff-container {
+    flex: 1;
+}
+
+.staff-list-container {
+    margin-right: 10px;
+    border: 1px solid;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Add this to make each input appear on a new line */
+.create-staff-container form input,
+.create-staff-container form select,
+.create-staff-container form button {
+    display: block;
+    margin-bottom: 10px; /* Optional: Adds some space between inputs */
+}
+
+.staff-member-container {
+    border: 1px solid #5CB6B0;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.add-staff-button {
+    width: 100px;
+}

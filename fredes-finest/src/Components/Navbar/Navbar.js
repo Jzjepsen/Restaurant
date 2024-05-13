@@ -12,7 +12,7 @@ const Navbar = () => {
         return (
           <>
               <Link to="/Manager/Overview" className={styles.link}>Manager Overview</Link>
-              <Link to="/Manager/ConfigureMenu" className={styles.link}>Configure Menu</Link>
+              <Link to="/Manager/Menu" className={styles.link}>Menu</Link>
               <Link to="/Manager/StaffManagement" className={styles.link}>Staff Management</Link>        
               <Link to="/Manager/Settings" className={styles.link}>Settings</Link>        
           </> 
@@ -21,7 +21,7 @@ const Navbar = () => {
         return (
         <>
             <Link to="/Waiter/Overview" className={styles.link}>Waiter Overview</Link>
-            <Link to="/Waiter/Menu" className={styles.link}>Waiter Menu</Link>
+            <Link to="/Waiter/Menu" className={styles.link}> Menu</Link>
             <Link to="/Waiter/Bookings" className={styles.link}>Waiter Bookings</Link>
             <Link to="/Waiter/Orders" className={styles.link}>Waiter Orders</Link>
         </>
