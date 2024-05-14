@@ -7,8 +7,11 @@ const Order = () => {
         <div>
           {currentOrder.map((orderItem, index) => (
             <div key={index}>
-              {/* Render order items here */}
-              <p>Order Item: {orderItem.menuItem.name} - Quantity: {orderItem.quantity}</p>
+              <p> Order Item: {orderItem.menuItem.name} </p>
+              <p> Quantity: {orderItem.quantity} </p>
+              <p> Time to Cook: {orderItem.menuItem.TimeToCook} </p>
+              <p> Price: {orderItem.menuItem.price} </p>
+              <br/>
             </div>
           ))}
         </div>
