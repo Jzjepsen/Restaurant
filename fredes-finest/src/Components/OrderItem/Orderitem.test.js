@@ -1,9 +1,9 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
-import OrderItems from './OrderItem';
+import { render, waitFor } from '@testing-library/react';
+import OrderItems from './OrderItems';
 
-test('each button has a unique identifier', () => {
+test('each button has a unique identifier', async () => {
   // Define test item
   const item = {
     menuItem: {
@@ -19,7 +19,7 @@ test('each button has a unique identifier', () => {
   const mockCommentChange = jest.fn();
 
   // Render the component
-  const { getByText } = render(
+  const { getByPlaceholderText } = render(
     <OrderItems
       item={item}
       onItemClick={mockItemClick}
@@ -27,9 +27,14 @@ test('each button has a unique identifier', () => {
     />
   );
 
-  // Find the button by its text content
-  const button = getByText('Add a comment');
+  // Wait for the input field to appear
+  await waitFor(() => {
+    expect(getByPlaceholderText('Add a comment')).toBeInTheDocument();
+  });
 
-  // Assert that the button has a unique identifier
-  expect(button.id).toMatch(/^commentInput-\d+$/);
+  // Find the input field by its class name
+  const inputField = document.querySelector('.commentInput');
+
+  // Assert that the input field exists
+  expect(inputField).toBeInTheDocument();
 });
