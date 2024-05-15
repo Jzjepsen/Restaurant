@@ -21,14 +21,14 @@ const Order = () => {
                         <p>Table ID: {order.tableId}</p>
                         <p>Total Amount: ${order.totalAmount}</p>
                         <p>Order Item ID: {order.orderItems.orderItemId}</p>
-                        <p>Comment: {order.orderItems.comment}</p>
-                        <p>Quantity: {order.orderItems.quantity}</p>
+                        <p>Comment: {order.orderItems.Comment}</p>
+                        <p>Quantity: {order.orderItems.Quantity}</p>
                         {menuItemDetails && (
                             <div>
                                 <p>Menu Item Name: {menuItemDetails.name}</p>
                                 <p>Price: ${menuItemDetails.price}</p>
                                 <p>Time to Cook: {menuItemDetails.TimeToCook}</p>
-                                <p>Status: {menuItemDetails.isSoldOut ? "Sold Out" : "Available"}</p>
+                                <p>Status: {menuItemDetails.SoldOut ? "Sold Out" : "Available"}</p>
                             </div>
                         )}
                         <br />

@@ -7,11 +7,7 @@ export const useMenu = () => useContext(MenuContext);
 
 export const MenuProvider = ({ children }) => {
     const [menuItems, setMenuItems] = useState([
-        { id: 1, name: "Pizza Margherita", price: 10, TimeToCook: "20 minutes", isSoldOut: true },
-        { id: 2, name: "Spaghetti Bolognese", price: 8, TimeToCook: "30 minutes", isSoldOut: true },
-        { id: 3, name: "Chicken Parmesan", price: 12, TimeToCook: "25 minutes", isSoldOut: false },
-        { id: 4, name: "Garlic Bread", price: 5, TimeToCook: "10 minutes", isSoldOut: false },
-        { id: 5, name: "Tiramisu", price: 6, TimeToCook: "1 hour", isSoldOut: false }
+        
     ]);
 
     const [isPending, setIsPending] = useState(true);
@@ -22,7 +18,7 @@ export const MenuProvider = ({ children }) => {
     };
 
     const fetchMenuItems = () => {
-        fetch('http://localhost:5059/api/MenuItems', {
+        fetch('https://localhost:7033/api/MenuItem', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -45,7 +41,7 @@ export const MenuProvider = ({ children }) => {
     };
 
     const addMenuItem = (newMenuItem) => {
-        fetch('https://localhost:7033/api/MenuItems', {
+        fetch('https://localhost:7033/api/MenuItem', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newMenuItem)
