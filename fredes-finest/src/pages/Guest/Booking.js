@@ -11,6 +11,7 @@ const Booking = () => {
     const [email, setEmail] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
+    const [name, setName] = useState('');
 
     // Increment the number of people (up to a maximum of 4)
     const incrementCount = () => {
@@ -92,8 +93,15 @@ const Booking = () => {
             )}
             {selectedTimeslot && (
                 <>
-                    <h3>Enter your email:</h3>
+                    <h3>Enter your name and your email:</h3>
                     <form onSubmit={handleConfirmOrder}>
+                        <input
+                            Type="Text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            placeholder="Enter your name"
+                            className="name-input"/>
                         <input
                             type="email"
                             value={email}
