@@ -8,6 +8,9 @@ const Booking = () => {
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTimeslot, setSelectedTimeslot] = useState('');
+    const [email, setEmail] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
 
     // Increment the number of people (up to a maximum of 4)
     const incrementCount = () => {
@@ -18,9 +21,6 @@ const Booking = () => {
     const decrementCount = () => {
         setNumberOfPeople(prevCount => (prevCount > 1 ? prevCount - 1 : 1));
     };
-
-    // Determine whether the "Next" button should be enabled
-    const isNextButtonEnabled = selectedDate !== null && numberOfPeople >= 1 && selectedTimeslot !== '';
 
     const generateTimeslots = () => {
         const startHour = 17; // 17:00
@@ -35,6 +35,23 @@ const Booking = () => {
     };
 
     const timeslots = generateTimeslots();
+
+    const handleConfirmOrder = (event) => {
+        event.preventDefault();
+        // Add your booking confirmation logic here
+        const bookingSuccess = Math.random() > 0.5; // Simulate success or failure
+
+        if (bookingSuccess) {
+            setModalMessage('Booking confirmed! You will receive a confirmation email shortly.');
+        } else {
+            setModalMessage('Booking failed. Please try again.');
+        }
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     return (
         <div className="booking-container">
@@ -73,16 +90,37 @@ const Booking = () => {
                     </div>
                 </>
             )}
+            {selectedTimeslot && (
+                <>
+                    <h3>Enter your email:</h3>
+                    <form onSubmit={handleConfirmOrder}>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            placeholder="Enter your email"
+                            className="email-input"
+                        />
+                        <button type="submit" className="confirm-button">
+                            Confirm Order
+                        </button>
+                    </form>
+                </>
+            )}
             <div>
                 <p>The reservation is not confirmed until you receive a confirmation email from us.</p>
                 <p>For groups of more than 4, please contact us on this number:</p>
                 <Link to="tel:+4523305149" className="phone-number">+45 2330 5149</Link>
             </div>
-            {/* Conditional rendering for the "Next" button */}
-            {selectedTimeslot && (
-                <Link to={isNextButtonEnabled ? "/Guest/Booking/ChooseTime" : "#"} className={`next-button ${isNextButtonEnabled ? '' : 'disabled'}`}>
-                    NEXT →
-                </Link>
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <p>{modalMessage}</p>
+                    </div>
+                </div>
             )}
         </div>
     );
