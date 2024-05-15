@@ -11,7 +11,9 @@ export const OrderProvider = ({ children }) => {
     }, []);
 
     const [currentOrder, setCurrentOrder] = useState([
-        { OrderId: 1, tableId: 1, totalAmount: 25, status: "preparing", orderItems: { orderItemId: 0, menuItemId: 1, comment: "extra spicy", quantity: 1 } }
+        { OrderId: 1, tableId: 1, totalAmount: 10, orderItems: { orderItemId: 0, menuItemId: 1, comment: "extra spicy", quantity: 1 } },
+        { OrderId: 2, tableId: 2, totalAmount: 16, orderItems: { orderItemId: 0, menuItemId: 2, comment: "without onion", quantity: 2 } }
+
     ]);
 
     const [isPending, setIsPending] = useState(true);

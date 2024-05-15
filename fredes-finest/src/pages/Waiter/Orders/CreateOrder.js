@@ -27,13 +27,13 @@ function CreateOrder() {
         }
         else{
             const existingItem = currentOrder.find(item => item.menuItem.id === menuItem.id);
-        if (existingItem) {
-            // Increase the quantity of the existing item
-            setCurrentOrder(currentOrder.map(item =>
-                item.menuItem.id === menuItem.id? {...item, quantity: item.quantity + 1} : item
-            ));
+            if (existingItem) {
+                // Increase the quantity of the existing item
+                setCurrentOrder(currentOrder.map(item =>
+                    item.menuItem.id === menuItem.id? {...item, quantity: item.quantity + 1} : item
+                ));
             } else {
-            // Add a new item to the order
+                // Add a new item to the order
                 setCurrentOrder([...currentOrder, { menuItem: menuItem, quantity: 1, comment: '' }]);
             }
         }
@@ -43,7 +43,6 @@ function CreateOrder() {
         setCurrentOrder(currentOrder.filter(item => item.menuItem.id !== selectedItemId));
         setSelectedItemId(null);
         setIsRemoveModalOpen(true);
-
     };
 
     const handleItemClick = (itemId) => {

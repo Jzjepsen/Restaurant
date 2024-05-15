@@ -20,7 +20,6 @@ const Order = () => {
                         <p>Order ID: {order.OrderId}</p>
                         <p>Table ID: {order.tableId}</p>
                         <p>Total Amount: ${order.totalAmount}</p>
-                        <p>Status: {order.status}</p>
                         <p>Order Item ID: {order.orderItems.orderItemId}</p>
                         <p>Comment: {order.orderItems.comment}</p>
                         <p>Quantity: {order.orderItems.quantity}</p>
