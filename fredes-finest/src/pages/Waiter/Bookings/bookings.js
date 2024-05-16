@@ -13,8 +13,13 @@ function Bookings() {
     // Handle date selection
     const handleDateChange = (date) => {
         setSelectedDate(date);
-        const formattedDate = date.toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
-        navigate(`/bookings/${formattedDate}`);
+        const month = date.toLocaleString('default', { month: 'long' });
+        const day = date.getDate();
+        const year = date.getFullYear();
+        const formattedDate = `${month} ${day} ${year}`;
+        const encodedDate = encodeURIComponent(formattedDate);
+        navigate(`/bookings/${encodedDate}`);
+
         console.log(formattedDate);
     };
 
@@ -32,13 +37,6 @@ function Bookings() {
                     dateFormat="MMMM d, yyyy"
                     className="date-picker"
                 />
-            </div>
-            <div className="date-list">
-                {bookings.map(booking => (
-                    <div key={booking.bookingId} className="booking-item">
-                        <Link to={`/bookings/${booking.date}`}>{booking.date}</Link>
-                    </div>
-                ))}
             </div>
         </div>
     );
