@@ -1,23 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useBooking } from '../../../services/BookingContext';
 
 function Bookings() {
     const { bookings, isPending, error } = useBooking();
+
+    // Get a unique list of dates
+    const dates = [...new Set(bookings.map(booking => booking.date))];
 
     return (
         <div className="bookings-container">
             <h1>Bookings</h1>
             {isPending && <div>Loading...</div>}
             {error && <div>{error}</div>}
-            <div className="bookings-list">
-                {bookings.map((booking) => (
-                    <div key={booking.bookingId} className="booking-item">
-                        <h2>Name: {booking.name}</h2>
-                        <p>Booking ID: {booking.bookingId}</p>
-                        <p>Table ID: {booking.tableId}</p>
-                        <p>Guest ID: {booking.guestId}</p>
-                        <p>Time Slot ID: {booking.timeSlotId}</p>
-                        <p>Date: {booking.date}</p>
+            <div className="date-list">
+                {dates.map(date => (
+                    <div key={date} className="date-item">
+                        <Link to={`/bookings/${date}`}>{date}</Link>
                     </div>
                 ))}
             </div>

@@ -6,7 +6,13 @@ export const useBooking = () => useContext(BookingContext);
 
 export const BookingProvider = ({ children }) => {
     const [bookings, setBookings] = useState([
-        { name: "John Doe", bookingId: 1, tableId: 2, guestId: 101, timeSlotId: 301, date: "May 26 2024"}
+        { bookingId: 1, tableId: 1, guestId: 101, timeSlotId: 301, date: "May 26 2024"},
+        { bookingId: 2, tableId: 2, guestId: 102, timeSlotId: 302, date: "May 27 2024"},
+        { bookingId: 3, tableId: 3, guestId: 103, timeSlotId: 303, date: "May 27 2024"},
+        { bookingId: 4, tableId: 4, guestId: 104, timeSlotId: 304, date: "May 28 2024"},
+        { bookingId: 5, tableId: 5, guestId: 105, timeSlotId: 305, date: "May 28 2024"},
+        { bookingId: 6, tableId: 6, guestId: 106, timeSlotId: 306, date: "May 28 2024"}
+
     ]);    
 
     const [isPending, setIsPending] = useState(true);
