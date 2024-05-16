@@ -11,7 +11,8 @@ export const BookingProvider = ({ children }) => {
         { bookingId: 3, tableId: 3, guestId: 103, timeSlotId: 303, date: "May 27 2024"},
         { bookingId: 4, tableId: 4, guestId: 104, timeSlotId: 304, date: "May 28 2024"},
         { bookingId: 5, tableId: 5, guestId: 105, timeSlotId: 305, date: "May 28 2024"},
-        { bookingId: 6, tableId: 6, guestId: 106, timeSlotId: 306, date: "May 28 2024"}
+        { bookingId: 6, tableId: 6, guestId: 106, timeSlotId: 306, date: "May 28 2024"},
+        { bookingId: 7, tableId: 7, guestId: 107, timeSlotId: 307, date: "May 29 2024"}
 
     ]);    
 
