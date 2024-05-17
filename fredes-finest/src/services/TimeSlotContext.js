@@ -1,7 +1,7 @@
 //Get available dates from the server
 export async function getAvailableDates(capacity) {
   try {
-    const response = await fetch(`http://localhost:5059/api/availableTimeslots/${capacity}`);
+    const response = await fetch(`https://localhost:7033/api/availableTimeslots/${capacity}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -15,7 +15,7 @@ export async function getAvailableDates(capacity) {
 //Get available timeslots for a specific date from the server
 export async function getAvailableTimeslots(date) {
   try {
-    const response = await fetch(`http://localhost:5059/api/availableTimeslots/${date}`);
+    const response = await fetch(`https://localhost:7033/api/availableTimeslots/${date}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -29,7 +29,7 @@ export async function getAvailableTimeslots(date) {
 //Confirm booking with the server
 export async function confirmBooking(email, name, tableID, timeSlotID, date) {
   try {
-    const response = await fetch('http://localhost:5059/api/ConfirmBooking', {
+    const response = await fetch('https://localhost:7033/api/ConfirmBooking', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
