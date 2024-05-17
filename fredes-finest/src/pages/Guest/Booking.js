@@ -1,48 +1,56 @@
+// Booking.js
+
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
+import { getAvailableDates, getAvailableTimeslots, confirmBooking } from '../../services/TimeSlotContext';
 
 const Booking = () => {
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [availableDates, setAvailableDates] = useState([]);
+    const [availableTimeslots, setAvailableTimeslots] = useState([]);
     const [selectedTimeslot, setSelectedTimeslot] = useState('');
     const [email, setEmail] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const [name, setName] = useState('');
 
-    // Increment the number of people (up to a maximum of 4)
+    useEffect(() => {
+        const fetchAvailableDates = async () => {
+            const dates = await getAvailableDates(numberOfPeople);
+            setAvailableDates(dates || []);
+        };
+
+        fetchAvailableDates();
+    }, [numberOfPeople]);
+
+    useEffect(() => {
+        const fetchAvailableTimeslots = async () => {
+            if (selectedDate) {
+                const timeslots = await getAvailableTimeslots(selectedDate.toISOString().split('T')[0]);
+                setAvailableTimeslots(timeslots || []);
+            }
+        };
+
+        fetchAvailableTimeslots();
+    }, [selectedDate]);
+
     const incrementCount = () => {
         setNumberOfPeople(prevCount => (prevCount < 4 ? prevCount + 1 : 4));
     };
 
-    // Decrement the number of people (down to a minimum of 1)
     const decrementCount = () => {
         setNumberOfPeople(prevCount => (prevCount > 1 ? prevCount - 1 : 1));
     };
 
-    const generateTimeslots = () => {
-        const startHour = 17; // 17:00
-        const endHour = 22; // 22:00
-        let timeslots = [];
-
-        for (let hour = startHour; hour <= endHour; hour++) {
-            timeslots.push(`${hour}:00`);
-        }
-
-        return timeslots;
-    };
-
-    const timeslots = generateTimeslots();
-
-    const handleConfirmOrder = (event) => {
+    const handleConfirmOrder = async (event) => {
         event.preventDefault();
-        // Add your booking confirmation logic here
-        const bookingSuccess = Math.random() > 0.5; // Simulate success or failure
+        const result = await confirmBooking(email, name, 1, selectedTimeslot, selectedDate.toISOString().split('T')[0]);
 
-        if (bookingSuccess) {
+        if (result) {
             setModalMessage('Booking confirmed! You will receive a confirmation email shortly.');
         } else {
             setModalMessage('Booking failed. Please try again.');
@@ -74,12 +82,13 @@ const Booking = () => {
                 placeholderText="Select a date"
                 dateFormat="MMMM d, yyyy"
                 className="date-picker"
+                includeDates={availableDates.map(date => new Date(date))}
             />
             {selectedDate && (
                 <>
                     <h3>Select a timeslot:</h3>
                     <div className="timeslot-buttons">
-                        {timeslots.map((timeslot, index) => (
+                        {availableTimeslots.map((timeslot, index) => (
                             <button
                                 key={index}
                                 className={`timeslot-button ${selectedTimeslot === timeslot ? 'selected' : ''}`}
@@ -96,7 +105,7 @@ const Booking = () => {
                     <h3>Enter your name and your email:</h3>
                     <form onSubmit={handleConfirmOrder}>
                         <input
-                            Type="Text"
+                            type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required

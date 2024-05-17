@@ -1,5 +1,5 @@
 //Get available dates from the server
-async function getAvailableDates(capacity) {
+export async function getAvailableDates(capacity) {
   try {
     const response = await fetch(`http://localhost:5059/api/availableTimeslots/${capacity}`);
     if (!response.ok) {
@@ -13,7 +13,7 @@ async function getAvailableDates(capacity) {
 }
 
 //Get available timeslots for a specific date from the server
-async function getAvailableTimeslots(date) {
+export async function getAvailableTimeslots(date) {
   try {
     const response = await fetch(`http://localhost:5059/api/availableTimeslots/${date}`);
     if (!response.ok) {
@@ -27,7 +27,7 @@ async function getAvailableTimeslots(date) {
 }
 
 //Confirm booking with the server
-async function confirmBooking(email, name, tableID, timeSlotID, date) {
+export async function confirmBooking(email, name, tableID, timeSlotID, date) {
   try {
     const response = await fetch('http://localhost:5059/api/ConfirmBooking', {
       method: 'POST',
