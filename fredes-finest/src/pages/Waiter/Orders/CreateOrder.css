@@ -38,10 +38,10 @@
 }
 
 .removeButton {
-    background-color: white; /* White background */
+    background-color: #D23D4C; /* White background */
     color: black; /* Black text */
     padding: 10px 24px; /* Some padding */
-    border: 2px solid black; /* Black border */
+    border: 2px solid rgb(186, 9, 9); /* Black border */
     cursor: pointer; /* Pointer cursor on hover */
     margin-top: 10px; /* Some margin at the top */
     border-radius: 10px;
@@ -49,12 +49,32 @@
 
 /* Update styles for the disabled button */
 .removeButton:disabled {
-    background-color: white; /* White background */
+    background-color: D23D4C; /* White background */
     color: gray; /* Gray text */
     border: 2px solid gray; /* Gray border */
     cursor: not-allowed; /* Not-allowed cursor on hover */
     border-radius: 10px;
 }
+
+.submitButton {
+    background-color: #5CB6B0; /* White background */
+    color: black; /* Black text */
+    padding: 10px 24px; /* Some padding */
+    border: 2px solid ; /* Black border */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-top: 10px; /* Some margin at the top */
+    border-radius: 10px;
+}
+
+/* Update styles for the disabled button */
+.submitButton:disabled {
+    background-color: 5CB6B0; /* White background */
+    color: gray; /* Gray text */
+    border: 2px solid gray; /* Gray border */
+    cursor: not-allowed; /* Not-allowed cursor on hover */
+    border-radius: 10px;
+}
+
 .headerRow {
     display: flex;
     justify-content: space-between;

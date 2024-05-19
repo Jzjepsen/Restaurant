@@ -1,32 +1,29 @@
-import { useState } from 'react'
 import './CreateMenu.css';
+import { useMenu } from '../../../services/MenuContext';
+import React, { useState } from 'react';
+
 
 const CreateMenu = () => {
+    const { addMenuItem } = useMenu();
     const [name, setName] = useState('');
-    const [allergens, setAllergens] = useState('');
+    const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [timeToCook, setTimeToCook] = useState('20');
+    const [timeToCook, setTimeToCook] = useState('');
+    const [isSoldOut, setIsSoldOut] = useState(false);
     const [isPending, setIsPending] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const menu = { name, allergens, price, timeToCook };
+        setIsPending(true); 
+        const newMenuItem = { name, description, price, timeToCook, isSoldOut };
 
-        setIsPending(true);
-
-        fetch('http://localhost:8000/menus', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(menu)
-        }).then(() => {
-            console.log('new menu added');
-            setIsPending(false);
-        })
-    }
+        addMenuItem(newMenuItem).then(() => {
+            setIsPending(false); // Reset isPending after submission
+        });    }
 
     return ( 
         <div className="createMenu">
-            <h1> Add a new menu</h1>
+            <h2> Add a new dish to the menu</h2>
             <form onSubmit={handleSubmit}>
                 <label className="menuAttributeTitle">Menu name:</label>
                 <input 
@@ -35,12 +32,12 @@ const CreateMenu = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <label className="menuAttributeTitle">Menu allergens:</label>
+                <label className="menuAttributeTitle">Menu Description:</label>
                 <input 
                     type="text"
                     required
-                    value={allergens}
-                    onChange={(e) => setAllergens(e.target.value)}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                 />
                 <label className="menuAttributeTitle">Menu price:</label>
                     <input
@@ -49,7 +46,7 @@ const CreateMenu = () => {
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                 />
-                <label className="menuAttributeTitle">Menu timeToCook:</label>
+                <label className="menuAttributeTitle">Cooking time:</label>
                 <select
                 value={timeToCook}
                 onChange={(e) => setTimeToCook(e.target.value)}
@@ -67,7 +64,7 @@ const CreateMenu = () => {
                     <option value="55">55</option>
                     <option value="60">60</option>
                 </select>
-                {!isPending && <button>Add menu</button>}
+                {!isPending && <button type="submit">Add menu</button>}
                 {isPending && <button disabled>Adding menu...</button>}
             </form>
         </div>

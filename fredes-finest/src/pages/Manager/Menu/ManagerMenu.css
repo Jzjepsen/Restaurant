@@ -1,0 +1,60 @@
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.menu-grid-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Adjust based on your design */
+    margin-top: 20px;
+}
+
+.menu-column,.create-menu-column {
+    flex: 1; /* This makes each column take up equal space */
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding is included in the width calculation */
+}
+
+.createMenu input {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc; /* Change the border color to #ccc */
+    box-sizing: border-box;
+    display: block;
+}
+
+.createMenu button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #5CB6B0; /* Green background */
+    color: white; /* White text */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.createMenu button:hover {
+    background-color: #4CAF50; /* Darker green on hover */
+}
+
+.createMenu select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f6f6f6; /* Light gray background */
+    box-sizing: border-box;
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.createMenu select:focus {
+    border-color: #5CB6B0; /* Green border on focus */
+}
