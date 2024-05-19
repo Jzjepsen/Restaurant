@@ -1,26 +1,70 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect'; 
 import Navbar from './Navbar';
-import UserProvider from '../../services/UserContext';
+import { UserProvider } from '../../services/UserContext';
 
+describe('Navbar component', () => {
+  test('renders navbar links for Manager role', async () => {
+    render(
+      <Router>
+        <UserProvider value={{ user: { role: 'Manager' } }}>
+          <Navbar />
+        </UserProvider>
+      </Router>
+    );
 
-// Mock the user context value
-jest.mock('../../services/UserProvider', () => ({
-  useUser: jest.fn(() => ({ user: { role: 'Manager' } })),
-}));
+    expect(await screen.findByText('Manager Overview')).toBeInTheDocument();
+    expect(screen.getByText('Configure Menu')).toBeInTheDocument();
+    expect(screen.getByText('Staff Management')).toBeInTheDocument();
+    expect(screen.getByText('Settings')).toBeInTheDocument();
+  });
 
-test('Navbar renders links based on user role', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <UserProvider>
-        <Navbar />
-      </UserProvider>
-    </MemoryRouter>
-  );
+  test('renders navbar links for Waiter role', async () => {
+    render(
+      <Router>
+        <UserProvider value={{ user: { role: 'Waiter' } }}>
+          <Navbar />
+        </UserProvider>
+      </Router>
+    );
 
-  expect(getByText('Manager Overview')).toBeInTheDocument();
-  expect(getByText('Configure Menu')).toBeInTheDocument();
-  expect(getByText('Staff Management')).toBeInTheDocument();
-  expect(getByText('Settings')).toBeInTheDocument();
+    expect(await screen.findByText('Waiter Overview')).toBeInTheDocument();
+    expect(screen.getByText('Waiter Menu')).toBeInTheDocument();
+    expect(screen.getByText('Waiter Bookings')).toBeInTheDocument();
+    expect(screen.getByText('Waiter Orders')).toBeInTheDocument();
+  });
+
+  test('renders navbar link for Kitchen role', async () => {
+    render(
+      <Router>
+        <UserProvider value={{ user: { role: 'Kitchen' } }}>
+          <Navbar />
+        </UserProvider>
+      </Router>
+    );
+
+    expect(await screen.findByText('Kitchen Overview')).toBeInTheDocument();
+  });
+
+  test('does not render any links for unknown role', async () => {
+    render(
+      <Router>
+        <UserProvider value={{ user: { role: 'Unknown' } }}>
+          <Navbar />
+        </UserProvider>
+      </Router>
+    );
+
+    expect(await screen.queryByText('Manager Overview')).not.toBeInTheDocument();
+    expect(await screen.queryByText('Configure Menu')).not.toBeInTheDocument();
+    expect(await screen.queryByText('Staff Management')).not.toBeInTheDocument();
+    expect(await screen.queryByText('Settings')).not.toBeInTheDocument();
+    expect(await screen.queryByText('Waiter Overview')).not.toBeInTheDocument();
+    expect(await screen.queryByText('Waiter Menu')).not.toBeInTheDocument();
+    expect(await screen.queryByText('Waiter Bookings')).not.toBeInTheDocument();
+    expect(await screen.queryByText('Waiter Orders')).not.toBeInTheDocument();
+    expect(await screen.queryByText('Kitchen Overview')).not.toBeInTheDocument();
+  });
 });
