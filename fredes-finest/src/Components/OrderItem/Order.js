@@ -1,4 +1,3 @@
-// Order.js
 function Order({ status, menuItem, quantity, comment, id, updateStatus, isKitchenView}) {
   console.log('Order component received updateStatus:', updateStatus);
 

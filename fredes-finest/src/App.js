@@ -14,11 +14,12 @@ import Payment from './pages/Waiter/Payment/Payment';
 import MenuGuest from './pages/Guest/MenuGuest';
 import Booking from './pages/Guest/Booking';
 import Help from './pages/Guest/Help';
-
 import WaiterMenuView from './pages/Waiter/Menu/WaiterMenuView';
 import ManagerMenuView from './pages/Manager/Menu/ManagerMenuView';
 import WaiterOrderView from './pages/Waiter/Orders/OrderView';
 import KitchenOrderView from './pages/Kitchen/OrderView';
+import BookingDate from './pages/Waiter/Bookings/BookingDate';
+
 
 function App() {
   // This user context is used to determine what to render in Navbar
@@ -45,6 +46,8 @@ function App() {
         <Route path='/Guest/Menu' element={<MenuGuest />} />  
         <Route path='/Guest/Booking' element={<Booking />} />
         <Route path='/Guest/Help' element={<Help />} />
+        <Route path="/bookings" element={<Bookings />} />
+        <Route path="/bookings/:date" element={<BookingDate />} />
       </Routes>
     </div>
   );

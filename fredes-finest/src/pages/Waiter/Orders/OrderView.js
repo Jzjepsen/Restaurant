@@ -2,7 +2,6 @@ import React from 'react';
 import { useOrder } from '../../../services/OrderContext';
 import Order from '../../../Components/OrderItem/Order';
 
-// OrderView.js (WaiterOrderView)
 function WaiterOrderView() {
   const { orderItems } = useOrder();
 

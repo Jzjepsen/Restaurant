@@ -9,6 +9,9 @@ function OrderItems({ item, onItemClick, onCommentChange, status = 'new order' }
                 {status && <p className="orderStatus">{status}</p>}  
             </div>
             <p className="menuItemQuantity">Amount: {item.quantity}</p>
+            <p>Price per dish: {item.menuItem.price}</p>
+
+
             <div className="commentSection">
                 <input 
                     type="text" 
