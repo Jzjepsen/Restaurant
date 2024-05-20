@@ -23,7 +23,7 @@ export const MenuProvider = ({ children }) => {
     
     // Function to fetch menu items
     const fetchMenuItems = () => {
-        fetch('http://localhost:5059/api/MenuItems', {
+        fetch('https://localhost:7033/api/MenuItem', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

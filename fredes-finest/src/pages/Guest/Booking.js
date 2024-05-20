@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
-import { getAvailableDates, getAvailableTimeslots, confirmBooking } from '../../services/TimeSlotContext';
+import { getAvailableDates, getAvailableTimeslots, confirmBooking, AddGuest } from '../../services/TimeSlotContext';
 
 const Booking = () => {
     const [numberOfPeople, setNumberOfPeople] = useState(1);
@@ -27,16 +27,35 @@ const Booking = () => {
         fetchAvailableDates();
     }, [numberOfPeople]);
 
+    
     useEffect(() => {
-        const fetchAvailableTimeslots = async () => {
-            if (selectedDate) {
-                const timeslots = await getAvailableTimeslots(selectedDate.toISOString().split('T')[0]);
-                setAvailableTimeslots(timeslots || []);
-            }
-        };
+  const fetchAvailableTimeslots = async () => {
+    if (selectedDate) {
+      const rawTimeSlots = await getAvailableTimeslots(selectedDate.toISOString().split('T')[0]);
+      //console.log('Raw timeslots:', rawTimeSlots);  
+      if (rawTimeSlots) {
+            const filteredSlots = [];
+            const desiredTimes = ["17:00", "18:00", "19:00", "20:00"];
+            desiredTimes.forEach(time => {
+                const uniqueTables = new Set();
+                rawTimeSlots.forEach(slot => {
+                    if (slot.startTime === time && !uniqueTables.has(slot.startTime)) {
+                        filteredSlots.push(slot);
+                        uniqueTables.add(slot.startTime);
+                    }
+                    console.log('Filtered slots:', filteredSlots);
+            });
+    });
+    setAvailableTimeslots(filteredSlots);
+  } else{
+    setAvailableTimeslots([]);
+  }
+}
+  };
 
-        fetchAvailableTimeslots();
-    }, [selectedDate]);
+  fetchAvailableTimeslots();
+}, [selectedDate]);
+
 
     const incrementCount = () => {
         setNumberOfPeople(prevCount => (prevCount < 4 ? prevCount + 1 : 4));
@@ -48,19 +67,37 @@ const Booking = () => {
 
     const handleConfirmOrder = async (event) => {
         event.preventDefault();
-        const result = await confirmBooking(email, name, 1, selectedTimeslot, selectedDate.toISOString().split('T')[0]);
-
-        if (result) {
-            setModalMessage('Booking confirmed! You will receive a confirmation email shortly.');
-        } else {
-            setModalMessage('Booking failed. Please try again.');
+    
+        try {
+            // Assuming tableId is always 1 as per your example; adjust accordingly.
+            const guestResponse = await AddGuest(0, name, email); // Send GuestId as 0 if it's auto-incremented
+    
+            if (guestResponse) {
+                const formattedDate = selectedDate.toISOString().split('T')[0];
+                const bookingResponse = await confirmBooking(0, 1, guestResponse.guestId, selectedTimeslot, formattedDate);
+                
+                if (bookingResponse) {
+                    setModalMessage('Booking confirmed! You will receive a confirmation email shortly.');
+                    setIsModalOpen(true);
+                } else {
+                    setModalMessage('Booking failed. Please try again.');
+                    setIsModalOpen(true);
+                }
+            } else {
+                setModalMessage('Failed to create guest. Please try again.');
+                setIsModalOpen(true);
+            }
+        } catch (error) {
+            console.error('Error during the booking process:', error);
+            setModalMessage('Error occurred during booking. Please try again.');
+            setIsModalOpen(true);
         }
-        setIsModalOpen(true);
     };
+    
 
     const closeModal = () => {
         setIsModalOpen(false);
-    };
+    }; 
 
     return (
         <div className="booking-container">
@@ -88,13 +125,13 @@ const Booking = () => {
                 <>
                     <h3>Select a timeslot:</h3>
                     <div className="timeslot-buttons">
-                        {availableTimeslots.map((timeslot, index) => (
+                        {availableTimeslots.map((timeslot) => (
                             <button
-                                key={index}
-                                className={`timeslot-button ${selectedTimeslot === timeslot ? 'selected' : ''}`}
-                                onClick={() => setSelectedTimeslot(timeslot)}
+                                key={timeslot.timeSlotId}
+                                className={`timeslot-button ${selectedTimeslot === timeslot.timeSlotId ? 'selected' : ''}`}
+                                onClick={() => setSelectedTimeslot(timeslot.timeSlotId)}
                             >
-                                {timeslot}
+                                {timeslot.startTime}
                             </button>
                         ))}
                     </div>
