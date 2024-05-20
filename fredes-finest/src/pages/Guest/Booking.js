@@ -1,40 +1,103 @@
+// Booking.js
+
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
+import { getAvailableDates, getAvailableTimeslots, confirmBooking, AddGuest } from '../../services/TimeSlotContext';
 
 const Booking = () => {
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [availableDates, setAvailableDates] = useState([]);
+    const [availableTimeslots, setAvailableTimeslots] = useState([]);
     const [selectedTimeslot, setSelectedTimeslot] = useState('');
+    const [email, setEmail] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+    const [name, setName] = useState('');
 
-    // Increment the number of people (up to a maximum of 4)
+    useEffect(() => {
+        const fetchAvailableDates = async () => {
+            const dates = await getAvailableDates(numberOfPeople);
+            setAvailableDates(dates || []);
+        };
+
+        fetchAvailableDates();
+    }, [numberOfPeople]);
+
+    
+    useEffect(() => {
+  const fetchAvailableTimeslots = async () => {
+    if (selectedDate) {
+      const rawTimeSlots = await getAvailableTimeslots(selectedDate.toISOString().split('T')[0]);
+      //console.log('Raw timeslots:', rawTimeSlots);  
+      if (rawTimeSlots) {
+            const filteredSlots = [];
+            const desiredTimes = ["17:00", "18:00", "19:00", "20:00"];
+            desiredTimes.forEach(time => {
+                const uniqueTables = new Set();
+                rawTimeSlots.forEach(slot => {
+                    if (slot.startTime === time && !uniqueTables.has(slot.startTime)) {
+                        filteredSlots.push(slot);
+                        uniqueTables.add(slot.startTime);
+                    }
+                    console.log('Filtered slots:', filteredSlots);
+            });
+    });
+    setAvailableTimeslots(filteredSlots);
+  } else{
+    setAvailableTimeslots([]);
+  }
+}
+  };
+
+  fetchAvailableTimeslots();
+}, [selectedDate]);
+
+
     const incrementCount = () => {
         setNumberOfPeople(prevCount => (prevCount < 4 ? prevCount + 1 : 4));
     };
 
-    // Decrement the number of people (down to a minimum of 1)
     const decrementCount = () => {
         setNumberOfPeople(prevCount => (prevCount > 1 ? prevCount - 1 : 1));
     };
 
-    // Determine whether the "Next" button should be enabled
-    const isNextButtonEnabled = selectedDate !== null && numberOfPeople >= 1 && selectedTimeslot !== '';
-
-    const generateTimeslots = () => {
-        const startHour = 17; // 17:00
-        const endHour = 22; // 22:00
-        let timeslots = [];
-
-        for (let hour = startHour; hour <= endHour; hour++) {
-            timeslots.push(`${hour}:00`);
+    const handleConfirmOrder = async (event) => {
+        event.preventDefault();
+    
+        try {
+            // Assuming tableId is always 1 as per your example; adjust accordingly.
+            const guestResponse = await AddGuest(0, name, email); // Send GuestId as 0 if it's auto-incremented
+    
+            if (guestResponse) {
+                const formattedDate = selectedDate.toISOString().split('T')[0];
+                const bookingResponse = await confirmBooking(0, 1, guestResponse.guestId, selectedTimeslot, formattedDate);
+                
+                if (bookingResponse) {
+                    setModalMessage('Booking confirmed! You will receive a confirmation email shortly.');
+                    setIsModalOpen(true);
+                } else {
+                    setModalMessage('Booking failed. Please try again.');
+                    setIsModalOpen(true);
+                }
+            } else {
+                setModalMessage('Failed to create guest. Please try again.');
+                setIsModalOpen(true);
+            }
+        } catch (error) {
+            console.error('Error during the booking process:', error);
+            setModalMessage('Error occurred during booking. Please try again.');
+            setIsModalOpen(true);
         }
-
-        return timeslots;
     };
+    
 
-    const timeslots = generateTimeslots();
+    const closeModal = () => {
+        setIsModalOpen(false);
+    }; 
 
     return (
         <div className="booking-container">
@@ -56,21 +119,47 @@ const Booking = () => {
                 placeholderText="Select a date"
                 dateFormat="MMMM d, yyyy"
                 className="date-picker"
+                includeDates={availableDates.map(date => new Date(date))}
             />
             {selectedDate && (
                 <>
                     <h3>Select a timeslot:</h3>
                     <div className="timeslot-buttons">
-                        {timeslots.map((timeslot, index) => (
+                        {availableTimeslots.map((timeslot) => (
                             <button
-                                key={index}
-                                className={`timeslot-button ${selectedTimeslot === timeslot ? 'selected' : ''}`}
-                                onClick={() => setSelectedTimeslot(timeslot)}
+                                key={timeslot.timeSlotId}
+                                className={`timeslot-button ${selectedTimeslot === timeslot.timeSlotId ? 'selected' : ''}`}
+                                onClick={() => setSelectedTimeslot(timeslot.timeSlotId)}
                             >
-                                {timeslot}
+                                {timeslot.startTime}
                             </button>
                         ))}
                     </div>
+                </>
+            )}
+            {selectedTimeslot && (
+                <>
+                    <h3>Enter your name and your email:</h3>
+                    <form onSubmit={handleConfirmOrder}>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            placeholder="Enter your name"
+                            className="name-input"/>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            placeholder="Enter your email"
+                            className="email-input"
+                        />
+                        <button type="submit" className="confirm-button">
+                            Confirm Order
+                        </button>
+                    </form>
                 </>
             )}
             <div>
@@ -78,11 +167,14 @@ const Booking = () => {
                 <p>For groups of more than 4, please contact us on this number:</p>
                 <Link to="tel:+4523305149" className="phone-number">+45 2330 5149</Link>
             </div>
-            {/* Conditional rendering for the "Next" button */}
-            {selectedTimeslot && (
-                <Link to={isNextButtonEnabled ? "/Guest/Booking/ChooseTime" : "#"} className={`next-button ${isNextButtonEnabled ? '' : 'disabled'}`}>
-                    NEXT →
-                </Link>
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <p>{modalMessage}</p>
+                    </div>
+                </div>
             )}
         </div>
     );
