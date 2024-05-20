@@ -3,7 +3,6 @@ import { useOrder } from '../../../services/OrderContext';
 import Order from '../../../Components/OrderItem/Order';
 
 function OrderView() {
-  const { currentOrder } = useOrder();
 
   return (
     <div>
