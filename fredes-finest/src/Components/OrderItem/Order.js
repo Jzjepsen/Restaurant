@@ -1,18 +1,21 @@
 import { useOrder } from "../../services/OrderContext";
 
-const Order = () => {
-    const { currentOrder } = useOrder();
+import React from 'react';
 
+const Order = ({ order }) => {
     return (
         <div>
-          {currentOrder.map((orderItem, index) => (
-            <div key={index}>
-              {/* Render order items here */}
-              <p>Order Item: {orderItem.menuItem.name} - Quantity: {orderItem.quantity}</p>
-            </div>
-          ))}
+            <h3>Status: {order.status}</h3>
+            <h4>Total Amount: {order.totalAmount}</h4>
+            <h4>Table ID: {order.tableId}</h4>
+            {order.orderItems.map((item, index) => (
+                <div key={index}>
+                    <p>Order Item: {item.menuItemId} - Quantity: {item.quantity}</p>
+                    <p>Comment: {item.comment}</p>
+                </div>
+            ))}
         </div>
-      );
-}
- 
+    );
+};
+
 export default Order;

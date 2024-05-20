@@ -10,7 +10,10 @@ function KitchenOrderView() {
     return (
       <div className="order-view-container">
         <h1>Kitchen Order View</h1>
-        <div className="order-column-container">
+        {currentOrder.map(order => (
+  <Order key={order.orderId} order={order} />
+))}
+   {/*      <div className="order-column-container">
           <div className="order-column">
             <h2>New Order</h2>
             {currentOrder.filter(item => item.status === 'new order').map(item => (
@@ -24,7 +27,7 @@ function KitchenOrderView() {
             <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} updateStatus={updateOrderStatus} id={item.id} isKitchenView={true} />
         ))}
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

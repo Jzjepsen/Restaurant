@@ -20,16 +20,17 @@ export const OrderProvider = ({ children }) => {
                 'Accept': 'application/json'
             }
         })
-        .then(response => {
+       .then(response => {
             if (!response.ok) throw new Error('Could not fetch the data for that resource');
             return response.json();
         })
-        .then(data => {
+       .then(data => {
+            console.log("Fetched Orders:", data); // Log the fetched data
             setCurrentOrder(data);
             setIsPending(false);
             setError(null);
         })
-        .catch(err => {
+       .catch(err => {
             setIsPending(false);
             setError(err.message);
             console.log(err);
