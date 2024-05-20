@@ -11,7 +11,6 @@ import { useOrder } from '../../../services/OrderContext';
 
 function CreateOrder() {
     // hooks
-    const { addOrder } = useOrder(); 
     const { currentOrder, setCurrentOrder } = useOrder(); // Access currentOrder and setCurrentOrder from context
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [isSubmitModalOpen, setSubmitSuccessfulOpen] = useState(false);
@@ -21,16 +20,24 @@ function CreateOrder() {
     const { menuItems } = useMenu();
 
 
-    const addToOrder = (menuItem, comment) => {
+    const addToOrder = (menuItem) => {
         if(menuItem.isSoldOut) {
             setIsAddFailedModalOpen(true);
-        }
-        else{
-            const existingItem = currentOrder.find(item => item.menuItem.id === menuItem.id);
-            if (existingItem) {
+        } else {
+            // Check if menuItem is valid before proceeding
+            if (!menuItem || typeof menuItem!== 'object' ||!menuItem.id) {
+                console.error("Invalid menuItem:", menuItem);
+                return; // Exit the function early if menuItem is invalid
+            }
+    
+            const existingItemIndex = currentOrder.findIndex(item => 
+                item && item.menuItem && item.menuItem.id === menuItem.id
+            );
+    
+            if (existingItemIndex >= 0) {
                 // Increase the quantity of the existing item
-                setCurrentOrder(currentOrder.map(item =>
-                    item.menuItem.id === menuItem.id? {...item, quantity: item.quantity + 1} : item
+                setCurrentOrder(currentOrder.map((item, index) => 
+                    index === existingItemIndex? {...item, quantity: item.quantity + 1} : item
                 ));
             } else {
                 // Add a new item to the order
@@ -43,6 +50,7 @@ function CreateOrder() {
         setCurrentOrder(currentOrder.filter(item => item.menuItem.id !== selectedItemId));
         setSelectedItemId(null);
         setIsRemoveModalOpen(true);
+
     };
 
     const handleItemClick = (itemId) => {
@@ -55,16 +63,14 @@ function CreateOrder() {
         ));
     };
 
-    const submitOrder = () => {
-        // Log the order to the console
+    const storeOrder = () => {
+        // this is where we need to pass the order to the backend via a service and a POST request using a hook 
         console.log('Order stored:', currentOrder);
         setSubmitSuccessfulOpen(true);
-        addOrder(currentOrder).then(() => {
-            console.log('Order submitted successfully');
-        }).catch((error) => {
-            console.error('Error submitting order:', error);
+        if (false /* replace with actual condition for when submitting fails, meaning we need a catch block in the service for orderItems endpoints */) {
             setIsSubmitFailedModalOpen(true);
-        });
+          }
+
     };
 
     const closeModal = () => {
@@ -72,7 +78,9 @@ function CreateOrder() {
         setIsRemoveModalOpen(false);
         setIsSubmitFailedModalOpen(false);
         setIsAddFailedModalOpen(false);
-    };
+
+
+      };
 
     return (
         <div className="createOrderContainer">
@@ -96,7 +104,7 @@ function CreateOrder() {
                                     </SuccesModal>
                         <button 
                             className="submitButton"
-                            onClick={submitOrder}
+                            onClick={storeOrder}
                             disabled={currentOrder.length === 0}
                             >
                             Submit Order</button>
@@ -114,14 +122,21 @@ function CreateOrder() {
                             </FailedModal>
                     </div>
                     <div className="currentOrderList">
-                        {currentOrder.map((item) => (
-                            <OrderItems 
-                                key={item.menuItem.id}
-                                item={item}
-                                onItemClick={handleItemClick}
-                                onCommentChange={updateComment}
-                            />
-                        ))}
+                        {currentOrder.map((item) => {
+                            // Safely check if item and item.menuItem exist and are objects
+                            if (!item ||!item.menuItem || typeof item.menuItem!== 'object') {
+                                return null; // Skip rendering for invalid items
+                            }
+
+                            return (
+                                <OrderItems 
+                                    key={item.menuItem.id}
+                                    item={item}
+                                    onItemClick={handleItemClick}
+                                    onCommentChange={updateComment}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
                 <div className="menuColumn">

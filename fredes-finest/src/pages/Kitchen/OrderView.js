@@ -5,7 +5,7 @@ import { useOrder } from '../../services/OrderContext';
 
 
 function KitchenOrderView() {
-    const { orderItems, updateOrderStatus } = useOrder();
+  const { currentOrder, updateOrderStatus } = useOrder(); 
   
     return (
       <div className="order-view-container">
@@ -13,14 +13,14 @@ function KitchenOrderView() {
         <div className="order-column-container">
           <div className="order-column">
             <h2>New Order</h2>
-            {orderItems.filter(item => item.status === 'new order').map(item => (
+            {currentOrder.filter(item => item.status === 'new order').map(item => (
                 <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} updateStatus={updateOrderStatus} id={item.id} isKitchenView={true} />
             ))}
 
           </div>
           <div className="order-column">
             <h2>Preparing</h2>
-            {orderItems.filter(item => item.status === 'preparing').map(item => (
+            {currentOrder.filter(item => item.status === 'preparing').map(item => (
             <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} updateStatus={updateOrderStatus} id={item.id} isKitchenView={true} />
         ))}
           </div>

@@ -9,8 +9,7 @@ export const OrderProvider = ({ children }) => {
         fetchOrders();
     }, []);
 
-    const [currentOrder, setCurrentOrder] = useState();
-
+    const [currentOrder, setCurrentOrder] = useState([]); 
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
