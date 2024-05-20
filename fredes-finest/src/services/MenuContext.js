@@ -6,10 +6,7 @@ const MenuContext = createContext();
 export const useMenu = () => useContext(MenuContext);
 
 export const MenuProvider = ({ children }) => {
-    const [menuItems, setMenuItems] = useState([
-        
-    ]);
-
+    const [menuItems, setMenuItems] = useState([]);    
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 

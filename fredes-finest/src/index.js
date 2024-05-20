@@ -7,20 +7,23 @@ import { UserProvider } from './services/UserContext';
 import { MenuProvider } from './services/MenuContext';
 import { StaffProvider} from './services/StaffContext';
 import { OrderProvider } from './services/OrderContext';
+import { BookingProvider } from './services/BookingContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserProvider>
-      <OrderProvider>
-        <StaffProvider>
-          <MenuProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </MenuProvider>
-        </StaffProvider>
-      </OrderProvider>
+      <BookingProvider>
+        <OrderProvider>
+          <StaffProvider>
+            <MenuProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </MenuProvider>
+          </StaffProvider>
+        </OrderProvider>
+      </BookingProvider>
     </UserProvider>
   </React.StrictMode>
 );

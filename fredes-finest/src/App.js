@@ -4,7 +4,6 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './pages/Home/home';
 import { useUser } from './services/UserContext';
 import ManagerOverview from './pages/Manager/Overview';
-import CreateMenu from './pages/Manager/Menu/CreateMenu';
 import StaffManagement from './pages/Manager/StaffManagement/StaffManagement';
 import Settings from './pages/Manager/Settings/settings';
 import Bookings from './pages/Waiter/Bookings/bookings';
@@ -18,6 +17,7 @@ import Help from './pages/Guest/Help';
 import WaiterMenuView from './pages/Waiter/Menu/WaiterMenuView';
 import ManagerMenuView from './pages/Manager/Menu/ManagerMenuView';
 import OrderView from './pages/Waiter/Orders/OrderView';
+import BookingDate from './pages/Waiter/Bookings/BookingDate';
 
 
 function App() {
@@ -44,6 +44,8 @@ function App() {
         <Route path='/Guest/Menu' element={<MenuGuest />} />  
         <Route path='/Guest/Booking' element={<Booking />} />
         <Route path='/Guest/Help' element={<Help />} />
+        <Route path="/bookings" element={<Bookings />} />
+        <Route path="/bookings/:date" element={<BookingDate />} />
       </Routes>
     </div>
   );
