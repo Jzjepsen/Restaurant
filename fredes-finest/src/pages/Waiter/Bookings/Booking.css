@@ -1,0 +1,61 @@
+.bookings-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.date-picker-container {
+    margin-bottom: 20px;
+}
+
+.date-list,
+.bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.date-item {
+    border: 1px solid #007bff;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.date-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.date-item a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.date-item a:hover {
+    color: #0056b3;
+}
+
+.booking-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.booking-item h2 {
+    margin: 0 0 10px 0;
+}
+
+.booking-item p {
+    margin: 5px 0;
+}
+
+.date-picker {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}

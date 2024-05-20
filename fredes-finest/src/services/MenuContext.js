@@ -12,7 +12,7 @@ export const MenuProvider = ({ children }) => {
         { id: 4, name: "Garlic Bread", price: 5, TimeToCook: "10 minutes", isSoldOut: false },
         { id: 5, name: "Tiramisu", price: 6, TimeToCook: "1 hour", isSoldOut: false }
     ]);    
-
+    const [menuItems, setMenuItems] = useState([]);    
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
@@ -22,7 +22,7 @@ export const MenuProvider = ({ children }) => {
     
     // Function to fetch menu items
     const fetchMenuItems = () => {
-        fetch('http://localhost:5059/api/MenuItems', {
+        fetch('http://localhost:5059/api/MenuItem', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
