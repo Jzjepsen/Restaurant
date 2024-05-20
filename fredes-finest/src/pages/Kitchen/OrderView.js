@@ -17,14 +17,14 @@ function KitchenOrderView() {
    {/*      <div className="order-column-container">
           <div className="order-column">
             <h2>New Order</h2>
-            {currentOrder.filter(item => item.status === 'new order').map(item => (
+            {currentOrder.filter(item => item.status === 'pending').map(item => (
                 <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} updateStatus={updateOrderStatus} id={item.id} isKitchenView={true} />
             ))}
 
           </div>
           <div className="order-column">
             <h2>Preparing</h2>
-            {currentOrder.filter(item => item.status === 'preparing').map(item => (
+            {currentOrder.filter(item => item.status === 'completed').map(item => (
             <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} updateStatus={updateOrderStatus} id={item.id} isKitchenView={true} />
         ))}
           </div>

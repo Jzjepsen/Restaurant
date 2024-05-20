@@ -18,7 +18,7 @@ function WaiterOrderView() {
         {/* New Order Column */}
         <div className="order-column">
           <h2>New Order</h2>
-          {currentOrder.filter(item => item.status === 'New').length > 0? (
+          {currentOrder.filter(item => item.status === 'Pending').length > 0? (
     currentOrder.filter(item => item.status === 'New').map(item => (
       <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} id={item.id} isKitchenView={true}/>
     ))
@@ -30,7 +30,7 @@ function WaiterOrderView() {
         {/* Preparing Column */}
         <div className="order-column">
           <h2>Preparing</h2>
-          {currentOrder.filter(item => item.status === 'Prepared').length > 0? (
+          {currentOrder.filter(item => item.status === 'Preparing').length > 0? (
     currentOrder.filter(item => item.status === 'Prepared').map(item => (
       <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} id={item.id} isKitchenView={true}/>
     ))
@@ -42,7 +42,7 @@ function WaiterOrderView() {
           {/* Done Column */}
           <div className="order-column">
           <h2>Done</h2>
-          {currentOrder.filter(item => item.status === 'Done').length > 0? (
+          {currentOrder.filter(item => item.status === 'Completed').length > 0? (
     currentOrder.filter(item => item.status === 'Done').map(item => (
       <Order key={item.id} status={item.status} menuItem={item.menuItem} quantity={item.quantity} comment={item.comment} id={item.id} isKitchenView={true}/>
     ))
