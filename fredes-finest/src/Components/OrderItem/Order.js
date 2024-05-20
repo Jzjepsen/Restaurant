@@ -13,28 +13,34 @@ const Order = () => {
 
     return (
         <div>
-            {currentOrder.map((order, index) => {
-                const menuItemDetails = getMenuItemDetails(order.orderItems.menuItemId);
-                return (
-                    <div key={index}>
-                        <p>Order ID: {order.OrderId}</p>
-                        <p>Table ID: {order.tableId}</p>
-                        <p>Total Amount: ${order.totalAmount}</p>
-                        <p>Order Item ID: {order.orderItems.orderItemId}</p>
-                        <p>Comment: {order.orderItems.Comment}</p>
-                        <p>Quantity: {order.orderItems.Quantity}</p>
-                        {menuItemDetails && (
-                            <div>
-                                <p>Menu Item Name: {menuItemDetails.name}</p>
-                                <p>Price: ${menuItemDetails.price}</p>
-                                <p>Time to Cook: {menuItemDetails.TimeToCook}</p>
-                                <p>Status: {menuItemDetails.SoldOut ? "Sold Out" : "Available"}</p>
+            {currentOrder.map((order, orderIndex) => (
+                <div key={orderIndex}>
+                    <p>OrderId: {order.orderId}</p>
+                    <p>TableId: {order.tableId}</p>
+                    <p>Total amount: ${order.totalAmount}</p>
+                    <p>Status: {order.status}</p>
+                    {order.orderItems.map((orderItem, itemIndex) => {
+                        const menuItemDetails = getMenuItemDetails(orderItem.menuItemId);
+                        return (
+                            <div key={orderItem.orderItemId || itemIndex}>
+                                <p>OrderItemId: {orderItem.orderItemId || itemIndex}</p>
+                                <p>menuItemId: {orderItem.menuItemId}</p>
+                                <p>MenuItem Name: {menuItemDetails ? menuItemDetails.name : 'N/A'}</p>
+                                <p>comment: {orderItem.comment}</p>
+                                <p>quantity: {orderItem.quantity}</p>
+                                {menuItemDetails && (
+                                    <div>
+                                        <p>Price: ${menuItemDetails.price}</p>
+                                        <p>Time to Cook: {menuItemDetails.timeToCook}</p>
+                                        <p>Status: {menuItemDetails.soldOut ? "Sold Out" : "Available"}</p>
+                                    </div>
+                                )}
+                                <br />
                             </div>
-                        )}
-                        <br />
-                    </div>
-                );
-            })}
+                        );
+                    })}
+                </div>
+            ))}
         </div>
     );
 };
