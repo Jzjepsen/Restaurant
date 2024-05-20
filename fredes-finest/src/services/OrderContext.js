@@ -15,7 +15,7 @@ export const OrderProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     const fetchOrders = () => {
-        fetch('https://localhost:7033/api/Order', {
+        fetch('http://localhost:5059/api/Order', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -38,7 +38,7 @@ export const OrderProvider = ({ children }) => {
     };
 
     const addOrder = (currentOrder) => {
-        fetch('https://localhost:7033/api/Order', {
+        fetch('http://localhost:5059/api/Order', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(currentOrder)

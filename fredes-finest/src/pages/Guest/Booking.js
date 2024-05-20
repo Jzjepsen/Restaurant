@@ -29,31 +29,41 @@ const Booking = () => {
 
     
     useEffect(() => {
-  const fetchAvailableTimeslots = async () => {
+const fetchAvailableTimeslots = async () => {
     if (selectedDate) {
-      const rawTimeSlots = await getAvailableTimeslots(selectedDate.toISOString().split('T')[0]);
-      //console.log('Raw timeslots:', rawTimeSlots);  
-      if (rawTimeSlots) {
+        const rawTimeSlots = await getAvailableTimeslots(selectedDate.toISOString().split('T')[0]);
+        console.log('Raw timeslots:', rawTimeSlots); // Log the raw timeslots received
+
+        if (rawTimeSlots) {
             const filteredSlots = [];
-            const desiredTimes = ["17:00", "18:00", "19:00", "20:00"];
+            const desiredTimes = ["17.00", "18.00", "19.00", "20.00"];
+
             desiredTimes.forEach(time => {
                 const uniqueTables = new Set();
+                console.log(`Checking for time slot: ${time}`); // Log the current time being checked
+
                 rawTimeSlots.forEach(slot => {
-                    if (slot.startTime === time && !uniqueTables.has(slot.startTime)) {
+                    if (slot.startTime === time &&!uniqueTables.has(slot.startTime)) {
                         filteredSlots.push(slot);
                         uniqueTables.add(slot.startTime);
                     }
-                    console.log('Filtered slots:', filteredSlots);
-            });
-    });
-    setAvailableTimeslots(filteredSlots);
-  } else{
-    setAvailableTimeslots([]);
-  }
-}
-  };
+                });
 
-  fetchAvailableTimeslots();
+                console.log(`Filtered slots for time ${time}:`, filteredSlots); // Log the filtered slots for each time
+            });
+
+            setAvailableTimeslots(filteredSlots);
+        } else {
+            console.log('No raw timeslots found'); // Log if no raw timeslots were found
+            setAvailableTimeslots([]);
+        }
+    } else {
+        console.log('No selected date'); // Log if no selected date is present
+        setAvailableTimeslots([]);
+    }
+};
+
+fetchAvailableTimeslots();
 }, [selectedDate]);
 
 

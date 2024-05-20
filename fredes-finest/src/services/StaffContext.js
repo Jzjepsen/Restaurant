@@ -11,7 +11,7 @@ export const StaffProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('https://localhost:7033/api/Staff', {
+        fetch('http://localhost:5059/api/Staff', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

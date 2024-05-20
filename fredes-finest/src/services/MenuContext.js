@@ -6,7 +6,7 @@ const MenuContext = createContext();
 export const useMenu = () => useContext(MenuContext);
 
 export const MenuProvider = ({ children }) => {
-    const [menuItems, setMenuItems] = useState([]);    
+    const [menuItems, setMenuItems] = useState([]);     
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
@@ -15,8 +15,7 @@ export const MenuProvider = ({ children }) => {
     };
 
     const fetchMenuItems = () => {
-        fetch('https://localhost:7033/api/MenuItem', {
-
+        fetch('http://localhost:5059/api/MenuItem', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -39,7 +38,7 @@ export const MenuProvider = ({ children }) => {
     };
 
     const addMenuItem = (newMenuItem) => {
-        fetch('https://localhost:7033/api/MenuItem', {
+        fetch('http://localhost:5059/api/MenuItem', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newMenuItem)
