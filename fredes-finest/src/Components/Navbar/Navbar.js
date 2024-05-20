@@ -30,6 +30,7 @@ const Navbar = () => {
           return (
           <>
             <Link to="/Kitchen/Overview" className={styles.link}>Kitchen Overview</Link>
+            <Link to="/Kitchen/Orders" className={styles.link}>Kitchen Orders</Link>
           </>
           );
           default:
