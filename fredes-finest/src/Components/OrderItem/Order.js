@@ -1,48 +1,22 @@
-// Order.js
-import React from 'react';
-import { useOrder } from '../../services/OrderContext';
-import { useMenu } from '../../services/MenuContext';
+function Order({ status, menuItem, quantity, comment, id, updateStatus, isKitchenView}) {
+  console.log('Order component received updateStatus:', updateStatus);
 
-const Order = () => {
-    const { currentOrder } = useOrder();
-    const { menuItems } = useMenu();
-
-    const getMenuItemDetails = (menuItemId) => {
-        return menuItems.find(item => item.id === menuItemId);
-    };
-
-    return (
-        <div>
-            {currentOrder.map((order, orderIndex) => (
-                <div key={orderIndex}>
-                    <p>OrderId: {order.orderId}</p>
-                    <p>TableId: {order.tableId}</p>
-                    <p>Total amount: ${order.totalAmount}</p>
-                    <p>Status: {order.status}</p>
-                    {order.orderItems.map((orderItem, itemIndex) => {
-                        const menuItemDetails = getMenuItemDetails(orderItem.menuItemId);
-                        return (
-                            <div key={orderItem.orderItemId || itemIndex}>
-                                <p>OrderItemId: {orderItem.orderItemId || itemIndex}</p>
-                                <p>menuItemId: {orderItem.menuItemId}</p>
-                                <p>MenuItem Name: {menuItemDetails ? menuItemDetails.name : 'N/A'}</p>
-                                <p>comment: {orderItem.comment}</p>
-                                <p>quantity: {orderItem.quantity}</p>
-                                {menuItemDetails && (
-                                    <div>
-                                        <p>Price: ${menuItemDetails.price}</p>
-                                        <p>Time to Cook: {menuItemDetails.timeToCook}</p>
-                                        <p>Status: {menuItemDetails.soldOut ? "Sold Out" : "Available"}</p>
-                                    </div>
-                                )}
-                                <br />
-                            </div>
-                        );
-                    })}
-                </div>
-            ))}
-        </div>
-    );
-};
-
+  return (
+    <div className="orderItem">
+      <div className="orderHeader">
+        <div className="menuItemName">{menuItem.name}</div>
+        <div className="orderStatus">{status}</div>
+      </div>
+      <p>Quantity: {quantity}</p>
+      <p>Price: {menuItem.price}</p>
+      {comment && <p>Comment: {comment}</p>}
+      {isKitchenView && status === 'new order' && (
+        <button onClick={() => updateStatus(id, 'preparing')}>Start Preparing</button>
+      )}
+      {isKitchenView && status === 'preparing' && (
+        <button onClick={() => updateStatus(id, 'done')}>Mark as Done</button>
+      )}
+    </div>
+  );
+}
 export default Order;
