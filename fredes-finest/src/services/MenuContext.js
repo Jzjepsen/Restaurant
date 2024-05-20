@@ -7,7 +7,6 @@ export const useMenu = () => useContext(MenuContext);
 
 export const MenuProvider = ({ children }) => {
     const [menuItems, setMenuItems] = useState([
-        { id: 1, name: "Pizza Margherita", price: 10, TimeToCook: "20 minutes", isSoldOut: true },
         { id: 2, name: "Spaghetti Bolognese", price: 8, TimeToCook: "30 minutes", isSoldOut: true },
         { id: 3, name: "Chicken Parmesan", price: 12, TimeToCook: "25 minutes", isSoldOut: false },
         { id: 4, name: "Garlic Bread", price: 5, TimeToCook: "10 minutes", isSoldOut: false },
