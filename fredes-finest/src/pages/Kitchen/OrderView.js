@@ -13,6 +13,7 @@ function KitchenOrderView() {
         {currentOrder.map(order => (
   <Order key={order.orderId} order={order} />
 ))}
+
    {/*      <div className="order-column-container">
           <div className="order-column">
             <h2>New Order</h2>
