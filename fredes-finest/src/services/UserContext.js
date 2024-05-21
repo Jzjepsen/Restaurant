@@ -5,38 +5,33 @@ const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({ role: 'kitchen' }); //default to kitchen
+  const [user, setUser] = useState({ role: 'kitchen' }); // Default to kitchen
 
-  // dummy login method, serving as placement for proper login. Default set to manager
-  // const login = (username, password) => {
-  //   setUser({ role: 'manager' }); 
-  // };
+  const login = async (username, password) => {
+    try {
+      const response = await fetch('https://localhost:7033/api/Auth/Login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setUser({ role: data.role }); // Store the user's role
+        console.log('Logged in as:', username);
+        console.log('User role set to:', data);
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, login }}>
       {children}
     </UserContext.Provider>
   );
 };
-
-//********* LOGIN METHOD TO CONNECT WITH BACKEND */ 
-//
-// const login = async (username, password) => {
-//     try {
-//       const response = await fetch('https://api.yoursite.com/login', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ username, password }),
-//       });
-//       const data = await response.json();
-//       if (response.ok) {
-//         setUser({ role: data.role }); // Store the user's role
-//       } else {
-//         throw new Error(data.message);
-//       }
-//     } catch (error) {
-//       console.error('Login failed:', error);
-//     }
-//   };

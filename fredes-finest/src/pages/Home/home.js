@@ -1,4 +1,5 @@
 import { useUser } from "../../services/UserContext";
+import Login from "../../Components/Login/Login";
 
 const Home = () => {
     const { setUser } = useUser();
@@ -17,6 +18,8 @@ const Home = () => {
                 <option value="Waiter">Waiter</option>
                 <option value="Manager">Manager</option>
             </select>
+            <br/>
+            <Login></Login>
         </div>
     );
 }
