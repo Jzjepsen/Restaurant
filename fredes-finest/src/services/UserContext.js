@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
+import { jwtDecode } from "jwt-decode";
 
 const UserContext = createContext();
 
@@ -16,13 +17,35 @@ export const UserProvider = ({ children }) => {
         },
         body: JSON.stringify({ username, password }),
       });
-      const data = await response.json();
+
       if (response.ok) {
-        setUser({ role: data.role }); // Store the user's role
-        console.log('Logged in as:', username);
-        console.log('User role set to:', data);
+        const data = await response.json();
+        const token = data.token; // Assuming the token is in the 'token' field of the response
+
+        if (typeof token === 'string' && token.trim() !== '') {
+          localStorage.setItem('token', token);
+          localStorage.setItem('tokenjwt', token);
+
+          const decoded = jwtDecode(token);
+          const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+          setUser({ role: role }); // Store the user's role
+          console.log('Logged in as:', username);
+          console.log('User role set to:', role);
+
+          // You can use a component state or routing to conditionally render the roles' messages
+          if (role === "manager" || role === "Manager") {
+            console.log("MANAGER!!!");
+          } else if (role === "waiter" || role === "Waiter") {
+            console.log("WAITER!!!");
+          } else if (role === "kitchen" || role === "Kitchen") {
+            console.log("KITCHEN!!!");
+          }
+        } else {
+          throw new Error('Invalid token received');
+        }
       } else {
-        throw new Error(data.message);
+        throw new Error('Login request failed');
       }
     } catch (error) {
       console.error('Login failed:', error);
