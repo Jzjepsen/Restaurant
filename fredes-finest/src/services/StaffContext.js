@@ -1,4 +1,3 @@
-// MenuContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const StaffContext = createContext();
@@ -10,31 +9,31 @@ export const StaffProvider = ({ children }) => {
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        fetch('http://localhost:5059/api/Staff', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+    const addStaffMember = async (username, password, role) => {
+        try {
+            const response = await fetch('https://localhost:7033/api/Auth/register', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password, role }) // Correctly format the body as JSON object
+            });
+    
+            if (!response.ok) {
+                throw new Error('Could not add staff member');
             }
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Could not fetch the data for that resource');
-            return response.json();
-        })
-        .then(data => {
-            setIsPending(false);
-            setStaff(data);
-            setError(null);
-        })
-        .catch(err => {
-            setIsPending(false);
-            setError(err.message);
-            console.log(err);
-        });
-    }, []);
+    
+            const newStaff = await response.json();
+            console.log('Staff member added:', newStaff);
+            
+            // Optionally, update the staff state with the new member
+            setStaff(prevStaff => [...prevStaff, newStaff]);
+        } catch (err) {
+            console.error('Error adding staff member:', err);
+            throw err; // Re-throw the error to be handled by the caller
+        }
+    };
 
     return (
-        <StaffContext.Provider value={{ staff, isPending, error }}>
+        <StaffContext.Provider value={{ staff, isPending, error, addStaffMember }}>
             {children}
         </StaffContext.Provider>
     );
