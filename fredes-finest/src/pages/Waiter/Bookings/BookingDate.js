@@ -19,7 +19,7 @@ function BookingDate() {
             <div className="bookings-list">
                 {filteredBookings.map((booking) => (
                     <div key={booking.bookingId} className="booking-item">
-                        <h2>Name: {booking.name}</h2>
+                        <h2>Name: {booking.guestName}</h2>
                         <p>Booking ID: {booking.bookingId}</p>
                         <p>Table ID: {booking.tableId}</p>
                         <p>Guest ID: {booking.guestId}</p>
