@@ -37,23 +37,25 @@ export const MenuProvider = ({ children }) => {
         });
     };
 
-    const addMenuItem = (newMenuItem) => {
-        fetch('https://localhost:7033/api/MenuItem', {
+    const addMenuItem = async (newMenuItem) => {
+    try {
+        const response = await fetch('https://localhost:7033/api/MenuItem', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newMenuItem)
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Could not add the menu item');
-            return response.json();
-        })
-        .then(data => {
-            console.log('Menu item added:', data);
-        })
-        .catch(err => {
-            console.error('Error adding menu item:', err);
         });
-    };
+        
+        if (!response.ok) {
+            throw new Error('Could not add the menu item');
+        }
+
+        const data = await response.json();
+        console.log('Menu item added:', data);
+    } catch (err) {
+        console.error('Error adding menu item:', err);
+    }
+};
+
 
     useEffect(() => {
         fetchMenuItems();
