@@ -7,8 +7,10 @@ function BookingDate() {
     const { bookings, isPending, error } = useBooking();
 
     // Filter bookings by the selected date
-    const filteredBookings = bookings.filter(booking => booking.date === date);
-
+   
+    const filteredBookings = bookings.filter(booking => 
+        booking.date.startsWith(date)
+    );
     return (
         <div className="booking-date-container">
             <h1>Bookings for {date}</h1>
