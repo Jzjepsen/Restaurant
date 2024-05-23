@@ -13,14 +13,8 @@ function Bookings() {
     // Handle date selection
     const handleDateChange = (date) => {
         setSelectedDate(date);
-        const month = date.toLocaleString('default', { month: 'long' });
-        const day = date.getDate();
-        const year = date.getFullYear();
-        const formattedDate = `${month} ${day} ${year}`;
-        const encodedDate = encodeURIComponent(formattedDate);
-        navigate(`/bookings/${encodedDate}`);
-
-        console.log(formattedDate);
+        const isoDateString = date.toISOString().split('T')[0];  // Format as 'YYYY-MM-DD'
+        navigate(`/bookings/${isoDateString}`);
     };
 
     return (
