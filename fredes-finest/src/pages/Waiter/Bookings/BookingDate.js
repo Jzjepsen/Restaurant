@@ -7,8 +7,10 @@ function BookingDate() {
     const { bookings, isPending, error } = useBooking();
 
     // Filter bookings by the selected date
-    const filteredBookings = bookings.filter(booking => booking.date === date);
-
+   
+    const filteredBookings = bookings.filter(booking => 
+        booking.date.startsWith(date)
+    );
     return (
         <div className="booking-date-container">
             <h1>Bookings for {date}</h1>
@@ -17,7 +19,7 @@ function BookingDate() {
             <div className="bookings-list">
                 {filteredBookings.map((booking) => (
                     <div key={booking.bookingId} className="booking-item">
-                        <h2>Name: {booking.name}</h2>
+                        <h2>Name: {booking.guestName}</h2>
                         <p>Booking ID: {booking.bookingId}</p>
                         <p>Table ID: {booking.tableId}</p>
                         <p>Guest ID: {booking.guestId}</p>

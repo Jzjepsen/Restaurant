@@ -17,6 +17,7 @@ const Booking = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const [name, setName] = useState('');
+    //const [selectedTableId, setSelectedTableId] = useState('');
 
     useEffect(() => {
         const fetchAvailableDates = async () => {
@@ -31,12 +32,12 @@ const Booking = () => {
     useEffect(() => {
 const fetchAvailableTimeslots = async () => {
     if (selectedDate) {
-        const rawTimeSlots = await getAvailableTimeslots(selectedDate.toISOString().split('T')[0]);
+        const rawTimeSlots = await getAvailableTimeslots(selectedDate.toISOString().split('T')[0], numberOfPeople);
         console.log('Raw timeslots:', rawTimeSlots); // Log the raw timeslots received
 
         if (rawTimeSlots) {
             const filteredSlots = [];
-            const desiredTimes = ["17.00", "18.00", "19.00", "20.00"];
+            const desiredTimes = ["17:00", "18:00", "19:00", "20:00"];
 
             desiredTimes.forEach(time => {
                 const uniqueTables = new Set();
@@ -84,7 +85,8 @@ fetchAvailableTimeslots();
     
             if (guestResponse) {
                 const formattedDate = selectedDate.toISOString().split('T')[0];
-                const bookingResponse = await confirmBooking(0, 1, guestResponse.guestId, selectedTimeslot, formattedDate);
+                const bookingResponse = await confirmBooking(0,  guestResponse.guestId, selectedTimeslot, formattedDate);
+                
                 
                 if (bookingResponse) {
                     setModalMessage('Booking confirmed! You will receive a confirmation email shortly.');
@@ -139,7 +141,10 @@ fetchAvailableTimeslots();
                             <button
                                 key={timeslot.timeSlotId}
                                 className={`timeslot-button ${selectedTimeslot === timeslot.timeSlotId ? 'selected' : ''}`}
-                                onClick={() => setSelectedTimeslot(timeslot.timeSlotId)}
+                                onClick={() => {
+                                    setSelectedTimeslot(timeslot.timeSlotId)
+                                    //setSelectedTableId(timeslot.tableId)
+                                }}
                             >
                                 {timeslot.startTime}
                             </button>

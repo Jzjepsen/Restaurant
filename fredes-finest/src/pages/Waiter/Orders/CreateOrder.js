@@ -21,23 +21,23 @@ function CreateOrder() {
 
 
     const addToOrder = (menuItem) => {
-        if(menuItem.isSoldOut) {
+        if (menuItem.soldOut) {
             setIsAddFailedModalOpen(true);
         } else {
             // Check if menuItem is valid before proceeding
-            if (!menuItem || typeof menuItem!== 'object' ||!menuItem.id) {
+            if (!menuItem || typeof menuItem !== 'object' || !menuItem.menuItemId) {
                 console.error("Invalid menuItem:", menuItem);
                 return; // Exit the function early if menuItem is invalid
             }
     
             const existingItemIndex = currentOrder.findIndex(item => 
-                item && item.menuItem && item.menuItem.id === menuItem.id
+                item && item.menuItem && item.menuItem.menuItemId === menuItem.menuItemId
             );
     
             if (existingItemIndex >= 0) {
                 // Increase the quantity of the existing item
                 setCurrentOrder(currentOrder.map((item, index) => 
-                    index === existingItemIndex? {...item, quantity: item.quantity + 1} : item
+                    index === existingItemIndex ? { ...item, quantity: item.quantity + 1 } : item
                 ));
             } else {
                 // Add a new item to the order
@@ -45,6 +45,7 @@ function CreateOrder() {
             }
         }
     };
+    
 
     const removeFromOrder = () => {
         setCurrentOrder(currentOrder.filter(item => item.menuItem.id !== selectedItemId));
