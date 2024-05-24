@@ -36,7 +36,6 @@ export const MenuProvider = ({ children }) => {
             console.log(err);
         });
     };
-
     const addMenuItem = async (newMenuItem) => {
     try {
         const response = await fetch('https://localhost:7033/api/MenuItem', {

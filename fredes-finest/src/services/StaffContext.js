@@ -1,5 +1,4 @@
-// MenuContext.js
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const StaffContext = createContext();
 
@@ -10,31 +9,53 @@ export const StaffProvider = ({ children }) => {
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        fetch('http://localhost:5059/api/Staff', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+    const addStaffMember = async (username, password, firstName, lastName, age, email, role) => {
+        try {
+            const response = await fetch('https://localhost:7033/api/Auth/register', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password, firstName, lastName, age, email, role })
+            });
+
+            if (!response.ok) {
+                throw new Error('Could not add staff member');
             }
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Could not fetch the data for that resource');
-            return response.json();
-        })
-        .then(data => {
+
+            const newStaff = await response.json();
+            console.log('Staff member added:', newStaff);
+
+            setStaff(prevStaff => [...prevStaff, newStaff]);
+        } catch (err) {
+            console.error('Error adding staff member:', err);
+            throw err;
+        }
+    };
+
+    const getUser = async () => {
+        try {
+            const response = await fetch('https://localhost:7033/api/User', {
+                method: 'GET',
+                headers: { "accept": "application/json" },
+            });
+
+            if (!response.ok) {
+                throw new Error('Could not fetch staff list');
+            }
+
+            const staffList = await response.json();
+            console.log('Fetched staff list:', staffList);
+
+            setStaff(staffList);
             setIsPending(false);
-            setStaff(data);
-            setError(null);
-        })
-        .catch(err => {
+        } catch (err) {
+            console.error('Error fetching staff list:', err);
+            setError(err);
             setIsPending(false);
-            setError(err.message);
-            console.log(err);
-        });
-    }, []);
+        }
+    };
 
     return (
-        <StaffContext.Provider value={{ staff, isPending, error }}>
+        <StaffContext.Provider value={{ staff, isPending, error, addStaffMember, getUser }}>
             {children}
         </StaffContext.Provider>
     );

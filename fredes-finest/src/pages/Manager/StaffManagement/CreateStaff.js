@@ -1,75 +1,91 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import { useStaff } from '../../../services/StaffContext';
 import './StaffManagement.css';
 
 const CreateStaff = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [age, setAge] = useState('');
-    const [email, setEmail] = useState('');
-    const [role, setRole] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [role, setRole] = useState('Waiter'); // Default value set to "Waiter"
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [age, setAge] = useState('')
+    const { addStaffMember } = useStaff();
     const [isPending, setIsPending] = useState(false);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const staff = { firstName, lastName, age, email, role};
-
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         setIsPending(true);
-
-        fetch('http://localhost:8000/staff', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(staff)
-        }).then(() => {
-            console.log('new staff added');
+        try {
+            await addStaffMember(username, password, firstName, lastName, age, email, role);
+        } catch (err) {
+            console.error('Failed to add staff member:', err);
+        } finally {
             setIsPending(false);
-        })
-    }
+        }
+    };
 
-    return ( 
+    return (
         <div className="createStaff">
-            <h2> Add a new staff member</h2>
+            <h2>Add a new staff member</h2>
             <form onSubmit={handleSubmit}>
-                <label>First name: </label>
-                <input
-                    type="text"
-                    required
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                />
-                <label>Last name:</label>
-                <input 
-                    type="text" 
-                    required
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-                <label>Staff age:</label>
-                <input
-                    type="text"
-                    required
-                    value={age}
-                    onChange={(e) => setAge(e.target.value)}
-                />
-                <label>Staff email:</label>
-                <input
-                    type="text"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <label>Staff role:</label>
-                <select>
+                <div>
+                    <label>Username: </label>
+                    <input
+                        type="text"
+                        required
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <label>First name:</label>
+                    <input
+                        type="text"
+                        required
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                    <label>Last name:</label>
+                    <input
+                        type="text"
+                        required
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                    <label>Age:</label>
+                    <input
+                        type="number"
+                        required
+                        value={age}
+                        onChange={(e) => setAge(Number(e.target.value))}
+                    />
+                    <label>Email:</label>
+                    <input
+                        type="text"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <label>Staff role:</label>
+                    <select
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
+                    >
                         <option value="Waiter">Waiter</option>
-                        <option value="Kitchen staff">Kitchen staff</option>
-
+                        <option value="KitchenStaff">KitchenStaff</option>
                     </select>
-                {!isPending && <button className="add-Staff-Button">Add staff</button>}
-                {isPending && <button disabled>Adding staff...</button>}
+                    {!isPending && <button type="submit">Add staff</button>}
+                    {isPending && <button type="submit" disabled>Adding staff...</button>}
+                </div>
             </form>
         </div>
-     );
-}
- 
+    );
+};
+
 export default CreateStaff;
