@@ -68,55 +68,58 @@ export const BookingProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     // Async function to fetch bookings and then fetch guests for each booking sequentially
-    const fetchBookingsAndGuestsSequentially = async () => {
-        setIsPending(true);
-        setError(null);
-    
-        try {
-            const bookingsResponse = await fetch('https://localhost:7033/api/Booking', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            });
-            if (!bookingsResponse.ok) throw new Error('Failed to fetch bookings');
-    
-            const bookings = await bookingsResponse.json();
-            const bookingsWithDetails = [];
-    
-            for (const booking of bookings) {
-                try {
-                    const guestResponse = await fetch(`https://localhost:7033/api/Guest/${booking.guestId}`);
-                    const guest = guestResponse.ok ? await guestResponse.json() : { name: "Guest not found" };
-    
-                    const timeSlotResponse = await fetch(`https://localhost:7033/api/TimeSlot/${booking.timeSlotId}`);
-                    const timeSlot = timeSlotResponse.ok ? await timeSlotResponse.json() : { tableId: "No table found" };
-    
-                    bookingsWithDetails.push({
-                        ...booking,
-                        guestName: guest.name,
-                        tableId: timeSlot.tableId  // Include the tableId from the TimeSlot
-                    });
-                } catch (error) {
-                    console.error('Error fetching guest or timeSlot:', error);
-                    bookingsWithDetails.push({ ...booking, guestName: "Failed to fetch guest", tableId: "Failed to fetch table" });
-                }
+    // Async function to fetch bookings and then fetch guests and time slots for each booking sequentially
+const fetchBookingsAndGuestsSequentially = async () => {
+    setIsPending(true);
+    setError(null);
+
+    try {
+        const bookingsResponse = await fetch('https://localhost:7033/api/Booking', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }
-    
-            setBookings(bookingsWithDetails);
-            setIsPending(false);
-        } catch (error) {
-            console.error('Error during the booking fetch process:', error);
-            setIsPending(false);
-            setError(error.message);
+        });
+        if (!bookingsResponse.ok) throw new Error('Failed to fetch bookings');
+
+        const bookings = await bookingsResponse.json();
+        const bookingsWithDetails = [];
+
+        for (const booking of bookings) {
+            try {
+                const guestResponse = await fetch(`https://localhost:7033/api/Guest/${booking.guestId}`);
+                const guest = guestResponse.ok ? await guestResponse.json() : { name: "Guest not found" };
+
+                // Fetch the SimpleTimeSlot by timeSlotId
+                const timeSlotResponse = await fetch(`https://localhost:7033/api/TimeSlot/simpleTimeSlot/${booking.timeSlotId}`);
+                const timeSlot = timeSlotResponse.ok ? await timeSlotResponse.json() : { tableId: "No table found", startTime: "No time available" };
+
+                bookingsWithDetails.push({
+                    ...booking,
+                    guestName: guest.name,
+                    tableId: timeSlot.tableId,  // Include the tableId from the TimeSlot
+                    startTime: timeSlot.startTime  // Include the startTime
+                });
+            } catch (error) {
+                console.error('Error fetching guest or timeSlot:', error);
+                bookingsWithDetails.push({ ...booking, guestName: "Failed to fetch guest", tableId: "Failed to fetch table", startTime: "Failed to fetch time" });
+            }
         }
-    };
-    
-    // Use useEffect to trigger the fetch operation when the component mounts
-    useEffect(() => {
-        fetchBookingsAndGuestsSequentially();
-    }, []);
+
+        setBookings(bookingsWithDetails);
+        setIsPending(false);
+    } catch (error) {
+        console.error('Error during the booking fetch process:', error);
+        setIsPending(false);
+        setError(error.message);
+    }
+};
+
+// Use useEffect to trigger the fetch operation when the component mounts
+useEffect(() => {
+    fetchBookingsAndGuestsSequentially();
+}, []);
 
     return (
         <BookingContext.Provider value={{ bookings, isPending, error }}>

@@ -6,8 +6,6 @@ function BookingDate() {
     const { date } = useParams();
     const { bookings, isPending, error } = useBooking();
 
-    // Filter bookings by the selected date
-   
     const filteredBookings = bookings.filter(booking => 
         booking.date.startsWith(date)
     );
@@ -23,7 +21,7 @@ function BookingDate() {
                         <p>Booking ID: {booking.bookingId}</p>
                         <p>Table ID: {booking.tableId}</p>
                         <p>Guest ID: {booking.guestId}</p>
-                        <p>Time Slot ID: {booking.timeSlotId}</p>
+                        <p>Start Time: {booking.startTime}</p>
                         <p>Date: {booking.date}</p>
                     </div>
                 ))}
