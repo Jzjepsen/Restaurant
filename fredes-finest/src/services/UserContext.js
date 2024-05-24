@@ -33,14 +33,6 @@ export const UserProvider = ({ children }) => {
           console.log('Logged in as:', username);
           console.log('User role set to:', role);
 
-          // You can use a component state or routing to conditionally render the roles' messages
-          if (role === "manager" || role === "Manager") {
-            console.log("MANAGER!!!");
-          } else if (role === "waiter" || role === "Waiter") {
-            console.log("WAITER!!!");
-          } else if (role === "kitchen" || role === "Kitchen") {
-            console.log("KITCHEN!!!");
-          }
         } else {
           throw new Error('Invalid token received');
         }
