@@ -64,7 +64,7 @@ function CreateOrder() {
         ));
     };
 
-    const storeOrder = () => {
+    const submitOrder = () => {
         // this is where we need to pass the order to the backend via a service and a POST request using a hook 
         console.log('Order stored:', currentOrder);
         setSubmitSuccessfulOpen(true);
@@ -105,7 +105,7 @@ function CreateOrder() {
                                     </SuccesModal>
                         <button 
                             className="submitButton"
-                            onClick={storeOrder}
+                            onClick={submitOrder}
                             disabled={currentOrder.length === 0}
                             >
                             Submit Order</button>
