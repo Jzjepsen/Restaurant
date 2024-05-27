@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Bookings from './Bookings';
+import Bookings from './bookings';
 import { useBooking } from '../../../services/BookingContext';
 
 jest.mock('../../../services/BookingContext', () => ({
