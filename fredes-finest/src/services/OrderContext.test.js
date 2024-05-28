@@ -22,7 +22,9 @@ describe('OrderContext', () => {
 
         await waitForNextUpdate();
 
-        expect(result.current.orders).toEqual(mockOrders);
+        console.log('Current state:', result.current);
+
+        expect(result.current.currentOrder).toEqual(mockOrders);
         expect(result.current.isPending).toBe(false);
         expect(result.current.error).toBeNull();
     });
@@ -34,7 +36,9 @@ describe('OrderContext', () => {
 
         await waitForNextUpdate();
 
-        expect(result.current.orders).toEqual([]);
+        console.log('Current state on error:', result.current);
+
+        expect(result.current.currentOrder).toEqual([]);
         expect(result.current.isPending).toBe(false);
         expect(result.current.error).toBe('Fetch error');
     });

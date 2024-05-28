@@ -20,7 +20,13 @@ describe('StaffContext', () => {
 
         const { result, waitForNextUpdate } = renderHook(() => useStaff(), { wrapper: StaffProvider });
 
-        await waitForNextUpdate();
+        console.log('Before waitForNextUpdate');
+        await act(async () => {
+            await waitForNextUpdate();
+        });
+        console.log('After waitForNextUpdate');
+
+        console.log('Current state:', result.current);
 
         expect(result.current.staff).toEqual(mockStaff);
         expect(result.current.isPending).toBe(false);
@@ -32,7 +38,13 @@ describe('StaffContext', () => {
 
         const { result, waitForNextUpdate } = renderHook(() => useStaff(), { wrapper: StaffProvider });
 
-        await waitForNextUpdate();
+        console.log('Before waitForNextUpdate (error case)');
+        await act(async () => {
+            await waitForNextUpdate();
+        });
+        console.log('After waitForNextUpdate (error case)');
+
+        console.log('Current state on error:', result.current);
 
         expect(result.current.staff).toEqual([]);
         expect(result.current.isPending).toBe(false);

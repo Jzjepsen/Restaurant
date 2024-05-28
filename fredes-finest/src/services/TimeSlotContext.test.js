@@ -1,3 +1,4 @@
+// TimeSlotContext.test.js
 import { getAvailableDates, getAvailableTimeslots, AddGuest, confirmBooking } from './TimeSlotContext';
 
 // Mock the fetch functions

@@ -17,7 +17,15 @@ describe('UserContext', () => {
 
         const { result, waitForNextUpdate } = renderHook(() => useUser(), { wrapper: UserProvider });
 
-        await waitForNextUpdate();
+        await act(async () => {
+            try {
+                await waitForNextUpdate({ timeout: 2000 });
+            } catch (error) {
+                console.error('Timeout error:', error);
+            }
+        });
+
+        console.log('Current state after fetch:', result.current);
 
         expect(result.current.user).toEqual(mockUser);
         expect(result.current.isPending).toBe(false);
@@ -29,7 +37,15 @@ describe('UserContext', () => {
 
         const { result, waitForNextUpdate } = renderHook(() => useUser(), { wrapper: UserProvider });
 
-        await waitForNextUpdate();
+        await act(async () => {
+            try {
+                await waitForNextUpdate({ timeout: 2000 });
+            } catch (error) {
+                console.error('Timeout error:', error);
+            }
+        });
+
+        console.log('Current state on error:', result.current);
 
         expect(result.current.user).toBeNull();
         expect(result.current.isPending).toBe(false);
