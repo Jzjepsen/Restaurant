@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Booking from './Booking';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -12,12 +12,14 @@ jest.mock('../../services/TimeSlotContext', () => ({
   AddGuest: jest.fn(),
 }));
 
-const setup = () => {
-  render(
-    <Router>
-      <Booking />
-    </Router>
-  );
+const setup = async () => {
+  await act(async () => {
+    render(
+      <Router>
+        <Booking />
+      </Router>
+    );
+  });
 };
 
 describe('Booking Component', () => {
@@ -35,14 +37,14 @@ describe('Booking Component', () => {
     jest.clearAllMocks();
   });
 
-  test('renders Booking component', () => {
-    setup();
+  test('renders Booking component', async () => {
+    await setup();
     expect(screen.getByText('How many are you reserving for?')).toBeInTheDocument();
     expect(screen.getByText('Select your reservation date:')).toBeInTheDocument();
   });
 
-  test('increments and decrements number of people', () => {
-    setup();
+  test('increments and decrements number of people', async () => {
+    await setup();
     const incrementButton = screen.getByText('+');
     const decrementButton = screen.getByText('-');
     const counter = screen.getByText('1');
@@ -55,19 +57,23 @@ describe('Booking Component', () => {
   });
 
   test('selects a date', async () => {
-    setup();
+    await setup();
     const dateInput = screen.getByPlaceholderText('Select a date');
-    fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    await act(async () => {
+      fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    });
 
     await waitFor(() => expect(getAvailableDates).toHaveBeenCalledTimes(1));
   });
 
   test('selects a timeslot', async () => {
-    setup();
+    await setup();
     const dateInput = screen.getByPlaceholderText('Select a date');
-    fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    await act(async () => {
+      fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    });
 
-    await waitFor(() => expect(getAvailableTimeslots).toHaveBeenCalledTimes(1), { timeout: 2000 });
+    await waitFor(() => expect(getAvailableTimeslots).toHaveBeenCalledTimes(1), { timeout: 500 });
 
     const timeslotButton = await screen.findByText('17:00');
     fireEvent.click(timeslotButton);
@@ -76,58 +82,70 @@ describe('Booking Component', () => {
   });
 
   test('fills in name and email and submits form successfully', async () => {
-    setup();
+    await setup();
     const dateInput = screen.getByPlaceholderText('Select a date');
-    fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    await act(async () => {
+      fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    });
 
-    await waitFor(() => expect(getAvailableTimeslots).toHaveBeenCalledTimes(1), { timeout: 2000 });
+    await waitFor(() => expect(getAvailableTimeslots).toHaveBeenCalledTimes(1), { timeout: 500 });
 
     fireEvent.click(screen.getByText('17:00'));
 
     fireEvent.change(screen.getByPlaceholderText('Enter your name'), { target: { value: 'John Doe' } });
     fireEvent.change(screen.getByPlaceholderText('Enter your email'), { target: { value: 'john@example.com' } });
 
-    fireEvent.click(screen.getByText('Confirm Order'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('Confirm Order'));
+    });
 
-    await waitFor(() => expect(confirmBooking).toHaveBeenCalledTimes(1), { timeout: 2000 });
+    await waitFor(() => expect(confirmBooking).toHaveBeenCalledTimes(1), { timeout: 500 });
     expect(screen.getByText('Booking confirmed! You will receive a confirmation email shortly.')).toBeInTheDocument();
   });
 
   test('handles booking failure', async () => {
     confirmBooking.mockResolvedValueOnce(false);
 
-    setup();
+    await setup();
     const dateInput = screen.getByPlaceholderText('Select a date');
-    fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    await act(async () => {
+      fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    });
 
-    await waitFor(() => expect(getAvailableTimeslots).toHaveBeenCalledTimes(1), { timeout: 2000 });
+    await waitFor(() => expect(getAvailableTimeslots).toHaveBeenCalledTimes(1), { timeout: 500 });
 
     fireEvent.click(screen.getByText('17:00'));
 
     fireEvent.change(screen.getByPlaceholderText('Enter your name'), { target: { value: 'John Doe' } });
     fireEvent.change(screen.getByPlaceholderText('Enter your email'), { target: { value: 'john@example.com' } });
 
-    fireEvent.click(screen.getByText('Confirm Order'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('Confirm Order'));
+    });
 
-    await waitFor(() => expect(confirmBooking).toHaveBeenCalledTimes(1), { timeout: 2000 });
+    await waitFor(() => expect(confirmBooking).toHaveBeenCalledTimes(1), { timeout: 500 });
     expect(screen.getByText('Booking failed. Please try again.')).toBeInTheDocument();
   });
 
   test('closes modal when close button is clicked', async () => {
-    setup();
+    await setup();
     const dateInput = screen.getByPlaceholderText('Select a date');
-    fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    await act(async () => {
+      fireEvent.change(dateInput, { target: { value: '2024-06-01' } });
+    });
 
-    await waitFor(() => expect(getAvailableTimeslots).toHaveBeenCalledTimes(1), { timeout: 2000 });
+    await waitFor(() => expect(getAvailableTimeslots).toHaveBeenCalledTimes(1), { timeout: 500 });
 
     fireEvent.click(screen.getByText('17:00'));
 
     fireEvent.change(screen.getByPlaceholderText('Enter your name'), { target: { value: 'John Doe' } });
     fireEvent.change(screen.getByPlaceholderText('Enter your email'), { target: { value: 'john@example.com' } });
 
-    fireEvent.click(screen.getByText('Confirm Order'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('Confirm Order'));
+    });
 
-    await waitFor(() => expect(confirmBooking).toHaveBeenCalledTimes(1), { timeout: 2000 });
+    await waitFor(() => expect(confirmBooking).toHaveBeenCalledTimes(1), { timeout: 500 });
 
     fireEvent.click(screen.getByText('×'));
 
