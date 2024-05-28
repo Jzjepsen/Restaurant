@@ -1,4 +1,3 @@
-// src/Components/Menu/Menu.test.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -32,9 +31,9 @@ describe('Menu Component', () => {
     renderMenu({ addToOrder: mockAddToOrder, showSoldOutStatus: false });
 
     expect(screen.getByText('Item 1')).toBeInTheDocument();
-    expect(screen.queryAllByText('Available').length).toBe(2); // Both items should have "Available" text
+    expect(screen.queryAllByText('Available').length).toBe(2);
     expect(screen.getByText('Item 2')).toBeInTheDocument();
-    expect(screen.queryByText('Sold Out')).not.toBeInTheDocument(); // "Sold Out" text should not be rendered
+    expect(screen.queryByText('Sold Out')).not.toBeInTheDocument();
   });
 
   test('calls addToOrder when available item is clicked', () => {
@@ -67,7 +66,7 @@ describe('Menu Component', () => {
     fireEvent.click(screen.getByText('Item 1'));
     expect(mockAddToOrder).toHaveBeenCalledWith(menuItems[0]);
 
-    fireEvent.click(screen.getAllByText('Toggle Sold Out')[1]); // Ensure this click targets the correct element
+    fireEvent.click(screen.getAllByText('Toggle Sold Out')[1]);
     expect(mockOnSoldOutChange).toHaveBeenCalledWith(1);
   });
 });
