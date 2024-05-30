@@ -5,13 +5,13 @@ import WaiterMenuView from './WaiterMenuView';
 import { useMenu } from '../../../services/MenuContext';
 import Menu from '../../../Components/Menu/Menu';
 
-// Mock the Menu component
+// Mock
 jest.mock('../../../Components/Menu/Menu', () => ({
   __esModule: true,
   default: jest.fn(() => <div>Mocked Menu Component</div>),
 }));
 
-// Mock the useMenu hook
+// Mock
 jest.mock('../../../services/MenuContext', () => ({
   useMenu: jest.fn(),
 }));

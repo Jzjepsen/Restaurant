@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import KitchenOrderView from './OrderView'; // Ensure this path is correct and matches the actual file name and location
+import KitchenOrderView from './OrderView';
 import { useOrder } from '../../services/OrderContext';
 
 jest.mock('../../services/OrderContext', () => ({

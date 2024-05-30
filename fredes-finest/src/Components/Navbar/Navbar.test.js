@@ -1,4 +1,3 @@
-// src/Components/Navbar/Navbar.test.js
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -6,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { useUser } from '../../services/UserContext';
 import Navbar from './Navbar';
 
-// Mock the useUser hook
 jest.mock('../../services/UserContext', () => ({
   useUser: jest.fn(),
 }));

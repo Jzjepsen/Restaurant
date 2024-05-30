@@ -10,10 +10,10 @@ describe('Home Component', () => {
     test('renders Home component', () => {
         render(<Home />);
 
-        // Check if the title is rendered
+     
         expect(screen.getByText('Homepage')).toBeInTheDocument();
 
-        // Check if the Login component is rendered
+       
         expect(screen.getByText('Mocked Login Component')).toBeInTheDocument();
     });
 });

@@ -65,16 +65,16 @@ describe('MenuContext', () => {
             await result.current.addMenuItem(newMenuItem);
         });
 
-        console.log('Menu items after adding new item:', result.current.menuItems); // Debugging: Log current menu items
-        console.log('Expected menu item:', newMenuItem); // Debugging: Log expected menu item
+        console.log('Menu items after adding new item:', result.current.menuItems); 
+        console.log('Expected menu item:', newMenuItem); 
 
-        // Ensure result.current.menuItems is an array
+       
         if (Array.isArray(result.current.menuItems)) {
             const addedItem = result.current.menuItems.find(item => item.id === newMenuItem.id);
-            console.log('Added item:', addedItem); // Debugging: Log the added item
+            console.log('Added item:', addedItem);
             expect(addedItem).toEqual(newMenuItem);
         } else {
-            console.error('menuItems is not an array. Current value:', result.current.menuItems); // Debugging: Log the current menu items if not an array
+            console.error('menuItems is not an array. Current value:', result.current.menuItems);
         }
     });
 });

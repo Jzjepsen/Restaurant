@@ -2,7 +2,7 @@ import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { BookingProvider, useBooking } from './BookingContext';
 
-// Mock the fetch functions
+// Mock the fetch
 global.fetch = jest.fn();
 
 const mockBookings = [
@@ -20,11 +20,11 @@ describe('BookingContext', () => {
 
     it('fetches bookings and guest details correctly', async () => {
         fetch
-            .mockResolvedValueOnce({ ok: true, json: async () => mockBookings })  // Mock fetch bookings
-            .mockResolvedValueOnce({ ok: true, json: async () => mockGuest })    // Mock fetch guest 1
-            .mockResolvedValueOnce({ ok: true, json: async () => mockTimeSlot }) // Mock fetch timeSlot 1
-            .mockResolvedValueOnce({ ok: true, json: async () => mockGuest })    // Mock fetch guest 2
-            .mockResolvedValueOnce({ ok: true, json: async () => mockTimeSlot }); // Mock fetch timeSlot 2
+            .mockResolvedValueOnce({ ok: true, json: async () => mockBookings })
+            .mockResolvedValueOnce({ ok: true, json: async () => mockGuest })  
+            .mockResolvedValueOnce({ ok: true, json: async () => mockTimeSlot })
+            .mockResolvedValueOnce({ ok: true, json: async () => mockGuest })  
+            .mockResolvedValueOnce({ ok: true, json: async () => mockTimeSlot });
 
         const { result, waitForNextUpdate } = renderHook(() => useBooking(), { wrapper: BookingProvider });
 
