@@ -17,12 +17,11 @@
     border-radius: 5px;
 }
 
-/* Add this to make each input appear on a new line */
 .create-staff-container form input,
 .create-staff-container form select,
 .create-staff-container form button {
     display: block;
-    margin-bottom: 10px; /* Optional: Adds some space between inputs */
+    margin-bottom: 10px;
 }
 
 .staff-member-container {

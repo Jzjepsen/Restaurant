@@ -1,6 +1,5 @@
 // TimeSlotContext.js
 
-// Get available dates from the server
 export async function getAvailableDates(capacity) {
   try {
     const response = await fetch(`https://localhost:7033/api/Table/availableDates/${capacity}`);
@@ -14,7 +13,6 @@ export async function getAvailableDates(capacity) {
   }
 }
 
-// Get available timeslots for a specific date from the server
 export async function getAvailableTimeslots(date, capacity) {
   try {
     const response = await fetch(`https://localhost:7033/api/TimeSlot/availableTimeslots/${date}/${capacity}`);
@@ -28,7 +26,6 @@ export async function getAvailableTimeslots(date, capacity) {
   }
 }
 
-// Confirm booking with the server
 export async function AddGuest(GuestId, name, email) {
   try {
     const response = await fetch('https://localhost:7033/api/Guest', {
@@ -52,9 +49,6 @@ export async function AddGuest(GuestId, name, email) {
   }
 }
 
-
-
-// Confirm booking with the server
 export async function confirmBooking(bookingID, guestID, timeSlotID, date) {
   console.log('Booking parameters:', bookingID, guestID, timeSlotID, date)
   try {

@@ -17,7 +17,6 @@ const Booking = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const [name, setName] = useState('');
-    //const [selectedTableId, setSelectedTableId] = useState('');
 
     useEffect(() => {
         const fetchAvailableDates = async () => {
@@ -33,7 +32,7 @@ const Booking = () => {
 const fetchAvailableTimeslots = async () => {
     if (selectedDate) {
         const rawTimeSlots = await getAvailableTimeslots(selectedDate.toISOString().split('T')[0], numberOfPeople);
-        console.log('Raw timeslots:', rawTimeSlots); // Log the raw timeslots received
+        console.log('Raw timeslots:', rawTimeSlots);
 
         if (rawTimeSlots) {
             const filteredSlots = [];
@@ -41,7 +40,7 @@ const fetchAvailableTimeslots = async () => {
 
             desiredTimes.forEach(time => {
                 const uniqueTables = new Set();
-                console.log(`Checking for time slot: ${time}`); // Log the current time being checked
+                console.log(`Checking for time slot: ${time}`);
 
                 rawTimeSlots.forEach(slot => {
                     if (slot.startTime === time &&!uniqueTables.has(slot.startTime)) {
@@ -50,16 +49,16 @@ const fetchAvailableTimeslots = async () => {
                     }
                 });
 
-                console.log(`Filtered slots for time ${time}:`, filteredSlots); // Log the filtered slots for each time
+                console.log(`Filtered slots for time ${time}:`, filteredSlots);
             });
 
             setAvailableTimeslots(filteredSlots);
         } else {
-            console.log('No raw timeslots found'); // Log if no raw timeslots were found
+            console.log('No raw timeslots found');
             setAvailableTimeslots([]);
         }
     } else {
-        console.log('No selected date'); // Log if no selected date is present
+        console.log('No selected date');
         setAvailableTimeslots([]);
     }
 };
@@ -80,8 +79,7 @@ fetchAvailableTimeslots();
         event.preventDefault();
     
         try {
-            // Assuming tableId is always 1 as per your example; adjust accordingly.
-            const guestResponse = await AddGuest(0, name, email); // Send GuestId as 0 if it's auto-incremented
+            const guestResponse = await AddGuest(0, name, email);
     
             if (guestResponse) {
                 const formattedDate = selectedDate.toISOString().split('T')[0];
@@ -127,7 +125,7 @@ fetchAvailableTimeslots();
             <DatePicker
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
-                minDate={new Date()} // Prevent past dates
+                minDate={new Date()}
                 placeholderText="Select a date"
                 dateFormat="MMMM d, yyyy"
                 className="date-picker"
@@ -143,7 +141,6 @@ fetchAvailableTimeslots();
                                 className={`timeslot-button ${selectedTimeslot === timeslot.timeSlotId ? 'selected' : ''}`}
                                 onClick={() => {
                                     setSelectedTimeslot(timeslot.timeSlotId)
-                                    //setSelectedTableId(timeslot.tableId)
                                 }}
                             >
                                 {timeslot.startTime}

@@ -3,7 +3,7 @@ import { useUser } from '../../services/UserContext';
 import styles from './navbar.css';
 
 const Navbar = () => {
-  const { user } = useUser(); // Get the current user role
+  const { user } = useUser();
 
 
   const renderLinks = () => {

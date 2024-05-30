@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import MenuGuest from './MenuGuest';
-import { useMenu } from '../../services/MenuContext'; // Adjust the path as necessary
+import { useMenu } from '../../services/MenuContext';
 
 jest.mock('../../services/MenuContext', () => ({
   useMenu: jest.fn(),

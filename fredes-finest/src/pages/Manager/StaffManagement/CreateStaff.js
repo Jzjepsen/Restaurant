@@ -5,7 +5,7 @@ import './StaffManagement.css';
 const CreateStaff = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('Waiter'); // Default value set to "Waiter"
+    const [role, setRole] = useState('Waiter');
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')

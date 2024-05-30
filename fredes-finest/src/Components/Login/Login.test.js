@@ -5,7 +5,6 @@ import '@testing-library/jest-dom/extend-expect';
 import Login from './Login';
 import { UserProvider } from '../../services/UserContext';
 
-// Mock jwt-decode
 jest.mock('jwt-decode', () => () => ({
   'http://schemas.microsoft.com/ws/2008/06/identity/claims/role': 'kitchen',
 }));

@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { useUser } from '../../services/UserContext';
 import Navbar from './Navbar';
 
-// Mock the useUser hook
 jest.mock('../../services/UserContext', () => ({
   useUser: jest.fn(),
 }));

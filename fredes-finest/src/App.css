@@ -1,9 +1,8 @@
-/* Style for the rest of the content */
 .content {
-  margin-left: 200px; /* Adjust this value if navbar width changes */
+  margin-left: 200px;
   padding: 1px 16px;
-  height: 1000px; /* Sample height */
-  background-color: #fff; /* Optional: Makes content visually distinctive */
+  height: 1000px;
+  background-color: #fff;
   
 }
 h1 {

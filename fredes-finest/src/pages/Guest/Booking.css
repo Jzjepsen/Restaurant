@@ -1,10 +1,9 @@
 .booking-container {
-    width: 50%; /* Adjust width as needed */
+    width: 50%;
     margin: 20px auto;
     padding: 20px;
     text-align: center;
-    font-family: Arial, sans-serif; /* Use a web-safe font or import one */
-}
+    font-family: Arial, sans-serif;
 
 h2 {
     margin-bottom: 20px;

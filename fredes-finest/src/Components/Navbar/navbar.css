@@ -1,18 +1,16 @@
 .navbar {
-  height: 100vh; /* Full-height */
-  width: 200px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
+  height: 100vh;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
   left: 0;
-  background-color: #E4F3F2; /* Background color */
-  overflow-x: hidden; /* Disable horizontal scroll */
+  background-color: #E4F3F2;
+  overflow-x: hidden;
   padding-top: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
-}
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   
-  /* Style the navigation menu inside the sidebar */
   .navbar a {
     padding: 10px 15px;
     text-decoration: none;
@@ -22,11 +20,9 @@
 
   }
   
-  /* Styling for when you hover over the links */
   .navbar a:hover {
-    background-color: #C6D5D6; /* Dark grey */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
-
+    background-color: #C6D5D6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   body {

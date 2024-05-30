@@ -1,7 +1,6 @@
 // TimeSlotContext.test.js
 import { getAvailableDates, getAvailableTimeslots, AddGuest, confirmBooking } from './TimeSlotContext';
 
-// Mock the fetch functions
 global.fetch = jest.fn();
 
 describe('TimeSlotContext', () => {

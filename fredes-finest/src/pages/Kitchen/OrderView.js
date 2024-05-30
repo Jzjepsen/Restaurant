@@ -1,6 +1,6 @@
 import React from 'react';
 import Order from '../../Components/OrderItem/Order';
-import './OrderView.css'; // Import the CSS file
+import './OrderView.css';
 import { useOrder } from '../../services/OrderContext';
 
 

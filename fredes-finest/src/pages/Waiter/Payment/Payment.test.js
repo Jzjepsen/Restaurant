@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import PaymentPage from './Payment';  // Correct the import to match the actual file
+import PaymentPage from './Payment';
 
 const mockFetch = (response, success = true) => {
   global.fetch = jest.fn(() =>

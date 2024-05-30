@@ -20,8 +20,7 @@
 }
 
 .orderStatus {
-    background-color: #f0f0f0; /* Light gray background for the status */
-    padding: 3px 6px;
+    background-color: #f0f0f0;
     border-radius: 4px;
     font-size: 14px;
     color: #333;

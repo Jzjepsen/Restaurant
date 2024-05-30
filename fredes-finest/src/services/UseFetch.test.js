@@ -1,7 +1,6 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import useFetch from './useFetch';
 
-// Mock the fetch functions
 global.fetch = jest.fn();
 
 describe('useFetch', () => {

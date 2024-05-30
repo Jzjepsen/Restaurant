@@ -2,7 +2,6 @@ import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { UserProvider, useUser } from './UserContext';
 
-// Mock the fetch functions
 global.fetch = jest.fn();
 
 const mockUser = { id: '1', name: 'John Doe' };

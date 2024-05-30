@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import KitchenOrderView from './OrderView'; // Ensure this path is correct and matches the actual file name and location
+import KitchenOrderView from './OrderView';
 import { useOrder } from '../../services/OrderContext';
 
 jest.mock('../../services/OrderContext', () => ({
@@ -57,8 +57,8 @@ describe('KitchenOrderView Component', () => {
       render(<KitchenOrderView />);
       expect(screen.getByText('Extra cheese')).toBeInTheDocument();
       expect(screen.getByText('No garlic')).toBeInTheDocument();
-      expect(screen.getByText('2')).toBeInTheDocument(); // Checks for quantity of Pizza
-      expect(screen.getByText('1')).toBeInTheDocument(); // Checks for quantity of Pasta
+      expect(screen.getByText('2')).toBeInTheDocument(); 
+      expect(screen.getByText('1')).toBeInTheDocument();
     } catch (error) {
       console.error('Error in test renders order details correctly:', error);
     }

@@ -52,10 +52,8 @@ describe('Bookings Component', () => {
 
     const datePicker = screen.getByPlaceholderText('Select a date');
     
-    // Change the date to May 27, 2024
     fireEvent.change(datePicker, { target: { value: '2024-05-27' } });
     
-    // Use waitFor to wait for the navigation function to be called
     await waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith('/bookings/2024-05-27');
     });

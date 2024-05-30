@@ -6,7 +6,7 @@ const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({ role: 'kitchen' }); // Default to kitchen
+  const [user, setUser] = useState({ role: 'kitchen' });
 
   const login = async (username, password) => {
     try {
@@ -20,8 +20,7 @@ export const UserProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        const token = data.token; // Assuming the token is in the 'token' field of the response
-
+        const token = data.token;
         if (typeof token === 'string' && token.trim() !== '') {
           localStorage.setItem('token', token);
           localStorage.setItem('tokenjwt', token);
@@ -29,7 +28,7 @@ export const UserProvider = ({ children }) => {
           const decoded = jwtDecode(token);
           const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
 
-          setUser({ role: role }); // Store the user's role
+          setUser({ role: role });
           console.log('Logged in as:', username);
           console.log('User role set to:', role);
 

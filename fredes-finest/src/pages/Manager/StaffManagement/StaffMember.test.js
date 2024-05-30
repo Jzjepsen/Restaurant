@@ -31,17 +31,14 @@ describe('StaffMember Component', () => {
       </Router>
     );
 
-    // Check that both staff members are rendered
     expect(screen.getByText('johndoe')).toBeInTheDocument();
     expect(screen.getByText('janesmith')).toBeInTheDocument();
 
-    // Check the details of the first staff member
     expect(screen.getByText('First name: John')).toBeInTheDocument();
     expect(screen.getByText('Last name: Doe')).toBeInTheDocument();
     expect(screen.getByText('Age: 30')).toBeInTheDocument();
     expect(screen.getByText('E-mail: john@example.com')).toBeInTheDocument();
 
-    // Check the details of the second staff member
     expect(screen.getByText('First name: Jane')).toBeInTheDocument();
     expect(screen.getByText('Last name: Smith')).toBeInTheDocument();
     expect(screen.getByText('Age: 25')).toBeInTheDocument();

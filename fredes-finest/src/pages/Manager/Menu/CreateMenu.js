@@ -18,7 +18,7 @@ const CreateMenu = () => {
         const newMenuItem = { name, description, price, timeToCook, isSoldOut };
 
         addMenuItem(newMenuItem).then(() => {
-            setIsPending(false); // Reset isPending after submission
+            setIsPending(false);
         });    }
 
     return ( 

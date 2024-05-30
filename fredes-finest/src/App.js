@@ -22,7 +22,6 @@ import BookingDate from './pages/Waiter/Bookings/BookingDate';
 
 
 function App() {
-  // This user context is used to determine what to render in Navbar
   const { user } = useUser();
 
   return (

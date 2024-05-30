@@ -29,8 +29,8 @@
 
 .currentOrderList {
     background-color: #D9D9D9;
-    padding: 20px; /* Optional: Add some padding for better appearance */
-    border-radius: 10px; /* Optional: Add rounded corners */
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .heading {
@@ -38,40 +38,39 @@
 }
 
 .removeButton {
-    background-color: #D23D4C; /* White background */
-    color: black; /* Black text */
-    padding: 10px 24px; /* Some padding */
-    border: 2px solid rgb(186, 9, 9); /* Black border */
-    cursor: pointer; /* Pointer cursor on hover */
-    margin-top: 10px; /* Some margin at the top */
+    background-color: #D23D4C;
+    color: black;
+    padding: 10px 24px;
+    border: 2px solid rgb(186, 9, 9);
+    cursor: pointer;
+    margin-top: 10px;
     border-radius: 10px;
 }
 
-/* Update styles for the disabled button */
+
 .removeButton:disabled {
-    background-color: D23D4C; /* White background */
-    color: gray; /* Gray text */
-    border: 2px solid gray; /* Gray border */
-    cursor: not-allowed; /* Not-allowed cursor on hover */
+    background-color: D23D4C;
+    color: gray;
+    border: 2px solid gray;
+    cursor: not-allowed;
     border-radius: 10px;
 }
 
 .submitButton {
-    background-color: #5CB6B0; /* White background */
-    color: black; /* Black text */
-    padding: 10px 24px; /* Some padding */
-    border: 2px solid ; /* Black border */
-    cursor: pointer; /* Pointer cursor on hover */
-    margin-top: 10px; /* Some margin at the top */
+    background-color: #5CB6B0;
+    color: black;
+    padding: 10px 24px;
+    border: 2px solid ;
+    cursor: pointer;
+    margin-top: 10px;
     border-radius: 10px;
 }
 
-/* Update styles for the disabled button */
 .submitButton:disabled {
-    background-color: 5CB6B0; /* White background */
-    color: gray; /* Gray text */
-    border: 2px solid gray; /* Gray border */
-    cursor: not-allowed; /* Not-allowed cursor on hover */
+    background-color: 5CB6B0;
+    color: gray;
+    border: 2px solid gray;
+    cursor: not-allowed;
     border-radius: 10px;
 }
 

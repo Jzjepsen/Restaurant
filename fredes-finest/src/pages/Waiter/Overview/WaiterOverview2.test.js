@@ -5,7 +5,6 @@ import { MemoryRouter } from 'react-router-dom';
 import WaiterOverview from './Overview';
 import { useNavigate } from 'react-router-dom';
 
-// Mock the useNavigate hook from react-router-dom
 const mockedUseNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

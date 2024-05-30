@@ -25,7 +25,7 @@ export const OrderProvider = ({ children }) => {
             return response.json();
         })
        .then(data => {
-            console.log("Fetched Orders:", data); // Log the fetched data
+            console.log("Fetched Orders:", data);
             setCurrentOrder(data);
             setIsPending(false);
             setError(null);

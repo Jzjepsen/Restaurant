@@ -2,7 +2,6 @@ import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { StaffProvider, useStaff } from './StaffContext';
 
-// Mock the fetch functions
 global.fetch = jest.fn();
 
 const mockStaff = [

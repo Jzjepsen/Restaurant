@@ -10,10 +10,9 @@ function Bookings() {
     const [selectedDate, setSelectedDate] = useState(null);
     const navigate = useNavigate();
     
-    // Handle date selection
     const handleDateChange = (date) => {
         setSelectedDate(date);
-        const isoDateString = date.toISOString().split('T')[0];  // Format as 'YYYY-MM-DD'
+        const isoDateString = date.toISOString().split('T')[0];
         navigate(`/bookings/${isoDateString}`);
     };
 

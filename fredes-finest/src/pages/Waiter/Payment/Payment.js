@@ -16,7 +16,7 @@ const PaymentPage = () => {
                     throw new Error('Failed to fetch payment data');
                 }
                 const data = await response.json();
-                console.log('Fetched data:', data); // Add this line
+                console.log('Fetched data:', data);
                 setPaymentData(data);
                 setLoading(false);
             } catch (err) {

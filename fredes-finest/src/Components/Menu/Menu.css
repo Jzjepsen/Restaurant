@@ -1,23 +1,23 @@
 .menu-container {
-    height: 500px; /* Set a fixed height for the container */
-    overflow-y: auto; /* Enable vertical scrolling if content overflows */
-    border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
-    padding: 10px; /* Optional: Add some padding inside the container */
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
 }
 
 .menu-item {
-    margin-bottom: 10px; /* Add some space between menu items */
+    margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
-    width: fill-available; /* Make the menu items take up the full width */
+    width: fill-available;
 }
 
 .menu-item.sold-out {
-    border: 1px solid red; /* Set the border color to red for sold out items */
+    border: 1px solid red;
 }
 
 .menu-item.available {
-    border: 1px solid #5CB6B0; /* Set the border color to green for available items */
+    border: 1px solid #5CB6B0;
 }
 
 .menu-item h3 {

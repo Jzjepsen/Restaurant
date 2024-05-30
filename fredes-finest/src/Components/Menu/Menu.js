@@ -2,7 +2,7 @@ import React from 'react';
 import './Menu.css';
 
 function Menu({ menuItems, addToOrder, onSoldOutChange, showSoldOutStatus = true}) {
-    console.log(addToOrder); // Temporarily log the addToOrder prop
+    console.log(addToOrder);
 
     const handleClick = (item, index) => {
         if (addToOrder) {

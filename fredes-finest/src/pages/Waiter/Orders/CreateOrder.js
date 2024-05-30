@@ -10,8 +10,7 @@ import { useOrder } from '../../../services/OrderContext';
 
 
 function CreateOrder() {
-    // hooks
-    const { currentOrder, setCurrentOrder } = useOrder(); // Access currentOrder and setCurrentOrder from context
+    const { currentOrder, setCurrentOrder } = useOrder();
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [isSubmitModalOpen, setSubmitSuccessfulOpen] = useState(false);
     const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
@@ -24,10 +23,9 @@ function CreateOrder() {
         if (menuItem.soldOut) {
             setIsAddFailedModalOpen(true);
         } else {
-            // Check if menuItem is valid before proceeding
             if (!menuItem || typeof menuItem !== 'object' || !menuItem.menuItemId) {
                 console.error("Invalid menuItem:", menuItem);
-                return; // Exit the function early if menuItem is invalid
+                return;
             }
     
             const existingItemIndex = currentOrder.findIndex(item => 
@@ -35,12 +33,10 @@ function CreateOrder() {
             );
     
             if (existingItemIndex >= 0) {
-                // Increase the quantity of the existing item
                 setCurrentOrder(currentOrder.map((item, index) => 
                     index === existingItemIndex ? { ...item, quantity: item.quantity + 1 } : item
                 ));
             } else {
-                // Add a new item to the order
                 setCurrentOrder([...currentOrder, { menuItem: menuItem, quantity: 1, comment: '' }]);
             }
         }
@@ -65,10 +61,9 @@ function CreateOrder() {
     };
 
     const submitOrder = () => {
-        // this is where we need to pass the order to the backend via a service and a POST request using a hook 
         console.log('Order stored:', currentOrder);
         setSubmitSuccessfulOpen(true);
-        if (false /* replace with actual condition for when submitting fails, meaning we need a catch block in the service for orderItems endpoints */) {
+        if (false) {
             setIsSubmitFailedModalOpen(true);
           }
 
@@ -124,9 +119,8 @@ function CreateOrder() {
                     </div>
                     <div className="currentOrderList">
                         {currentOrder.map((item) => {
-                            // Safely check if item and item.menuItem exist and are objects
                             if (!item ||!item.menuItem || typeof item.menuItem!== 'object') {
-                                return null; // Skip rendering for invalid items
+                                return null;
                             }
 
                             return (

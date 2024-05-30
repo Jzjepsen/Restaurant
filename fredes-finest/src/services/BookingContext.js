@@ -67,8 +67,6 @@ export const BookingProvider = ({ children }) => {
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
-    // Async function to fetch bookings and then fetch guests for each booking sequentially
-    // Async function to fetch bookings and then fetch guests and time slots for each booking sequentially
 const fetchBookingsAndGuestsSequentially = async () => {
     setIsPending(true);
     setError(null);
@@ -91,15 +89,14 @@ const fetchBookingsAndGuestsSequentially = async () => {
                 const guestResponse = await fetch(`https://localhost:7033/api/Guest/${booking.guestId}`);
                 const guest = guestResponse.ok ? await guestResponse.json() : { name: "Guest not found" };
 
-                // Fetch the SimpleTimeSlot by timeSlotId
                 const timeSlotResponse = await fetch(`https://localhost:7033/api/TimeSlot/simpleTimeSlot/${booking.timeSlotId}`);
                 const timeSlot = timeSlotResponse.ok ? await timeSlotResponse.json() : { tableId: "No table found", startTime: "No time available" };
 
                 bookingsWithDetails.push({
                     ...booking,
                     guestName: guest.name,
-                    tableId: timeSlot.tableId,  // Include the tableId from the TimeSlot
-                    startTime: timeSlot.startTime  // Include the startTime
+                    tableId: timeSlot.tableId,
+                    startTime: timeSlot.startTime
                 });
             } catch (error) {
                 console.error('Error fetching guest or timeSlot:', error);
@@ -116,7 +113,6 @@ const fetchBookingsAndGuestsSequentially = async () => {
     }
 };
 
-// Use useEffect to trigger the fetch operation when the component mounts
 useEffect(() => {
     fetchBookingsAndGuestsSequentially();
 }, []);

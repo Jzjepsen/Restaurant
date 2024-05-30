@@ -5,13 +5,11 @@ import WaiterMenuView from './WaiterMenuView';
 import { useMenu } from '../../../services/MenuContext';
 import Menu from '../../../Components/Menu/Menu';
 
-// Mock the Menu component
 jest.mock('../../../Components/Menu/Menu', () => ({
   __esModule: true,
   default: jest.fn(() => <div>Mocked Menu Component</div>),
 }));
 
-// Mock the useMenu hook
 jest.mock('../../../services/MenuContext', () => ({
   useMenu: jest.fn(),
 }));
@@ -35,7 +33,6 @@ describe('WaiterMenuView Component', () => {
   test('renders WaiterMenuView component', () => {
     render(<WaiterMenuView />);
     
-    // Debug to check the DOM structure
     screen.debug();
 
     expect(screen.getByText('Menu')).toBeInTheDocument();
