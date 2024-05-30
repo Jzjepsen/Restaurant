@@ -1,4 +1,3 @@
-// TimeSlotContext.test.js
 import { getAvailableDates, getAvailableTimeslots, AddGuest, confirmBooking } from './TimeSlotContext';
 
 global.fetch = jest.fn();
